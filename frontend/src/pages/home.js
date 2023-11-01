@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useEmployeesContext } from "../hooks/useEmployeesContext"
 import EmployeeSum from "../components/EmployeeSum"
 import EmployeeForm from"../components/EmployeeForm"
+
 const Home = () =>
 {
-    const [employees, setEmployees] = useState(null)
+    const {employees,dispatch} = useEmployeesContext()
 
     useEffect(() => {
         const fetchEmployees = async () => {
@@ -12,11 +14,11 @@ const Home = () =>
 
             if(response.ok)
             {
-                setEmployees(json)
+                dispatch({type:'SET_EMPLOYEES',payload: json})
             }
         }
         fetchEmployees()
-    }, []) // empty dependency array ensures function only fires off once
+    }, [dispatch]) // empty dependency array ensures function only fires off once
 
     return (
         <div className="home">
