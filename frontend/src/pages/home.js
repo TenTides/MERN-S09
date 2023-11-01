@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import EmployeeSum from "../components/EmployeeSum"
-
+import EmployeeForm from"../components/EmployeeForm"
 const Home = () =>
 {
     const [employees, setEmployees] = useState(null)
@@ -25,6 +25,7 @@ const Home = () =>
                     <EmployeeSum key={employee._id} employee = {employee}/>
                 ))}
             </div>
+            <EmployeeForm/>
         </div>
     )
 }
