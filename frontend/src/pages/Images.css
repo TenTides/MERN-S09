@@ -8,7 +8,7 @@
 .s_nav {
   background-color: #1D1F23;
   color: #fff;
-  height: 8vh;
+  height: max(8vh, 40px);
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -27,7 +27,7 @@
 
 .s_nav input{
   width: 25vw;
-  height: 5vh;
+  height: max(5vh, 35px);
   outline: 1px solid #fff;
   border-radius: 5px;
   box-sizing: border-box;
@@ -44,7 +44,7 @@
   font-size: 22px;
   border: 1px solid #fff;
   border-radius: 5px;
-  padding: 8px;
+  padding: 0.9vh;
 }
 
 .s_nav .help {
@@ -62,7 +62,7 @@
   align-items: center;
   border: 1px solid #fff;
   border-radius: 50%;
-  padding: 15px;
+  padding: max(2vh, 1vw);
   margin-left: auto;
   margin-right: 2vw;
 }

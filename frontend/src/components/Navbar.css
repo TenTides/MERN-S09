@@ -12,6 +12,7 @@
   font-family: 'IBM Plex Mono', monospace;
   color: #F7F5F5;
   margin-left: 46vw;
+  position: fixed;
 }
 
 .name {
