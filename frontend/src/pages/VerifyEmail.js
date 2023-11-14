@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // Updated import
 
 function VerifyEmail() {
   const { token } = useParams();
-  const history = useHistory();
+  const navigate = useNavigate(); // Replaced useHistory with useNavigate
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -12,7 +12,7 @@ function VerifyEmail() {
     const verifyEmail = async () => {
       try {
         await axios.post('http://yourbackend.com/api/verify-email', { token });
-        history.push('/email-verified'); // Redirect to a success page or login page
+        navigate('/email-verified'); // Redirect to a success page or login page
       } catch (err) {
         setError('Verification failed. Please try again or contact support.');
       } finally {
@@ -23,7 +23,7 @@ function VerifyEmail() {
     if (token) {
       verifyEmail();
     }
-  }, [token, history]);
+  }, [token, navigate]); // Updated dependency array
 
   if (loading) return <p>Verifying...</p>;
   if (error) return <p>{error}</p>;
