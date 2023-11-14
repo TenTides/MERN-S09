@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install frontend dependencies
-RUN npm install
+RUN npm install --lts
 
 # Copy the frontend application code to the container
 COPY . .

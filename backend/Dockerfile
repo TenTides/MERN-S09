@@ -8,7 +8,10 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install backend dependencies
-RUN npm install
+RUN npm install --lts
+RUN npm install nodemailer
+RUN npm install bcrypt
+RUN npm install uuid
 
 # Copy the backend application code to the container
 COPY . .
