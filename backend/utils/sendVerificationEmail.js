@@ -1,28 +1,22 @@
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const transporter = nodemailer.createTransport({
-  service: 'SendGrid',
-  auth: {
-    user: 'apikey', // Use 'apikey' as the user
-    pass: process.env.SENDGRID_API_KEY // Check its in .env file
+const sendEmail = async (to, subject, text, html) => {
+  const msg = {
+    to,
+    from: 'pa129475@ucf.edu', // Use your verified sender email here
+    subject,
+    text,
+    html,
+  };
+
+  try {
+    await sgMail.send(msg);
+    console.log('Email sent to', to);
+  } catch (error) {
+    console.error('Error sending email:', error);
+    throw error;
   }
-});
-
-const sendVerificationEmail = (email, verificationToken) => {
-  const verificationUrl = `http://yourfrontend.com/verify?token=${verificationToken}`;
-  
-  transporter.sendMail({
-    to: email,
-    from: 'pa129475@ucf.edu', // Verify sender in SendGrid
-    subject: 'Verify Your Email',
-    html: `Please click the link to verify your email: <a href="${verificationUrl}">Verify Email</a>`
-  }, (err, info) => {
-    if (err) {
-      console.error('Error sending verification email:', err);
-    } else {
-      console.log('Verification email sent:', info.response);
-    }
-  });
 };
 
-module.exports = sendVerificationEmail;
+module.exports = sendEmail;

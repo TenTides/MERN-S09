@@ -1,8 +1,7 @@
-// controllers/verifyEmailController.js
-const User = require('../models/userModel'); // Adjust the path as necessary
+const User = require('../models/userModel');
 
 const verifyEmail = async (req, res) => {
-  const { token } = req.body;
+  const token = req.query.token;
   try {
     const user = await User.findOne({ verificationToken: token });
     if (!user) {

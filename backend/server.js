@@ -2,10 +2,9 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
-const nodemailer = require('nodemailer');
 const employeeRoutes = require('./routes/employees')
-const signup = require('./routes/signup');
 const verifyEmailRoutes = require('./routes/verifyEmail');
+const userRoutes = require('./routes/users');
 //Express App is started
 const app = express() 
 
@@ -18,8 +17,8 @@ app.use((req,res,next) =>{
 
 //routes
 app.use('/api/employees',employeeRoutes)
-app.use('/api/signup', signup);
 app.use('/api/verify-email', verifyEmailRoutes);
+app.use('/api/users', userRoutes);
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)

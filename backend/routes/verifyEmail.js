@@ -2,6 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { verifyEmail } = require('../controllers/verifyEmailController');
 
-router.post('/', verifyEmail);
+router.get('/', verifyEmail);
 
 module.exports = router;
