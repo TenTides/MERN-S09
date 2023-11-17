@@ -16,6 +16,10 @@ const employmentSchema = new Schema({
         type: String,
         required: true,
     },
+    file: {
+        type: String,
+        required: true,
+    },
     type: {
         type: String,
         required: true,

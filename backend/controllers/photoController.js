@@ -1,48 +1,48 @@
-const EmployeeRecords = require('../models/employmentModel')
+const photos = require('../models/photoModel')
 const mongoose = require('mongoose')
 // get ALL records
-const getRecords = async(req,res) =>
+const getPhotos= async(req,res) =>
 {
-    const records = await EmployeeRecords.find({}).sort({createdAt: -1})
+    const records = await photos.find({}).sort({createdAt: -1})
     res.status(200).json(records)
 }
 // get single record
-const getSingleRecord = async(req,res) =>
+const getSinglePhoto = async(req,res) =>
 {
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No Such Employee For given ID'})
+        return res.status(404).json({error: 'No Such Photo For given ID'})
     }
-    const record = await EmployeeRecords.findById(id)
+    const record = await photos.findById(id)
     if(!record)
     {
-        return res.status(404).json({error: 'No Such Employee For given ID'})
+        return res.status(404).json({error: 'No Such Photo For given ID'})
     }
     res.status(200).json(record)
 }
 
-
 // create new record
-const createRecord = async(req,res) =>
+const createPhoto = async(req,res) =>
 {
-    const {name,position,employer,file,type} = req.body
+    const {file,tags} = req.body
     // add doc to db
     try {
-        const newEmployee = await EmployeeRecords.create({name,position,employer,file,type})
-        res.status(200).json(newEmployee)
+        const newPhoto = await photos.create({file,tags})
+        newPhoto.save()
+        res.status(200).json(newPhoto)
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 }
 
 // delete a record
-const deleteRecord = async(req,res) =>
+const deletePhoto = async(req,res) =>
 {
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No Such Employee For given ID'})
     }
-    const record = await EmployeeRecords.findOneAndDelete({_id: id})
+    const record = await photos.findOneAndDelete({_id: id})
     if(!record)
     {
         return res.status(400).json({error: 'No Such Employee For given ID'})
@@ -51,21 +51,22 @@ const deleteRecord = async(req,res) =>
 
 }
 
-const updateRecord = async(req,res) =>
+const updatePhoto = async(req,res) =>
 {
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No Such Employee For given ID'})
     }
-    const record = await EmployeeRecords.findOneAndUpdate({_id: id},{...req.body})
+    const record = await photos.findOneAndUpdate({_id: id},{...req.body})
     if(!record)
     {
         return res.status(400).json({error: 'No Such Employee For given ID'})
     }
     res.status(200).json(record)
 }
+
 // search records
-const searchRecords = async (req, res) => {
+const searchPhotos = async (req, res) => {
     const searchField = req.body.fieldName; // The field you want to search
     const searchValue = req.body.fieldValue; // The value to search for
     
@@ -73,7 +74,7 @@ const searchRecords = async (req, res) => {
     const searchRegex = new RegExp(searchValue, 'i'); // 'i' for case-insensitive search
     
     try {
-        const records = await EmployeeRecords.find({ [searchField]: searchRegex });
+        const records = await photos.find({ [searchField]: searchRegex });
         if (records.length === 0) {
             return res.status(400).json({ error: 'No matching records found' });
         }
@@ -83,12 +84,11 @@ const searchRecords = async (req, res) => {
     }
 }
 
-
 module.exports = {
-    createRecord,
-    getRecords,
-    getSingleRecord,
-    deleteRecord,
-    updateRecord,
-    searchRecords
+    createPhoto,
+    getPhotos,
+    getSinglePhoto,
+    deletePhoto,
+    updatePhoto,
+    searchPhotos
 }
