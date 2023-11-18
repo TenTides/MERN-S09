@@ -3,14 +3,14 @@ const mongoose = require('mongoose')
 // get ALL records
 const getPhotos= async(req,res) =>
 {
-    const records = await photos.find({}).sort({createdAt: -1})
+    const records = await photos.find({userID: req.session.userID}).sort({createdAt: -1})
     res.status(200).json(records)
 }
 // get single record
 const getSinglePhoto = async(req,res) =>
 {
     const {id} = req.params
-    if(!mongoose.Types.ObjectId.isValid(id)){
+    if(!mongoose.Types.ObjectId.isValid(id) || !mongoose.Types.ObjectId.isValid(req.session.userID)){
         return res.status(404).json({error: 'No Such Photo For given ID'})
     }
     const record = await photos.findById(id)
@@ -24,10 +24,10 @@ const getSinglePhoto = async(req,res) =>
 // create new record
 const createPhoto = async(req,res) =>
 {
-    const {file,tags} = req.body
+    const {file,tags,userID} = req.body
     // add doc to db
     try {
-        const newPhoto = await photos.create({file,tags})
+        const newPhoto = await photos.create({file,tags,userID})
         newPhoto.save()
         res.status(200).json(newPhoto)
     } catch (error) {
@@ -39,10 +39,10 @@ const createPhoto = async(req,res) =>
 const deletePhoto = async(req,res) =>
 {
     const {id} = req.params
-    if(!mongoose.Types.ObjectId.isValid(id)){
+    if(!mongoose.Types.ObjectId.isValid(id)|| !mongoose.Types.ObjectId.isValid(req.session.userID)){
         return res.status(404).json({error: 'No Such Employee For given ID'})
     }
-    const record = await photos.findOneAndDelete({_id: id})
+    const record = await photos.findOneAndDelete({_id: id, userID: req.session.userID})
     if(!record)
     {
         return res.status(400).json({error: 'No Such Employee For given ID'})
@@ -54,10 +54,10 @@ const deletePhoto = async(req,res) =>
 const updatePhoto = async(req,res) =>
 {
     const {id} = req.params
-    if(!mongoose.Types.ObjectId.isValid(id)){
+    if(!mongoose.Types.ObjectId.isValid(id) || !mongoose.Types.ObjectId.isValid(req.session.userID)){
         return res.status(404).json({error: 'No Such Employee For given ID'})
     }
-    const record = await photos.findOneAndUpdate({_id: id},{...req.body})
+    const record = await photos.findOneAndUpdate({_id: id, userID: req.session.userID},{...req.body})
     if(!record)
     {
         return res.status(400).json({error: 'No Such Employee For given ID'})
@@ -73,15 +73,26 @@ const searchPhotos = async (req, res) => {
     // Create a regular expression to perform a wildcard search
     const searchRegex = new RegExp(searchValue, 'i'); // 'i' for case-insensitive search
     
-    try {
-        const records = await photos.find({ [searchField]: searchRegex });
+    if (searchField === 'tags') {
+        searchValue = searchValue.split(',').map((tag) => tag.trim());
+      }
+      try {
+        const query = { userID: req.session.userID };
+        if (searchField === 'tags') {
+          query[searchField] = { $in: searchValue };
+        } else {
+          query[searchField] = searchRegex;
+        }
+    
+        const records = await photos.find(query);
         if (records.length === 0) {
-            return res.status(400).json({ error: 'No matching records found' });
+          return res.status(400).json({ error: 'No matching records found' });
         }
         res.status(200).json(records);
-    } catch (err) {
+      } 
+      catch (err) {
         return res.status(500).json({ error: 'An error occurred while searching records' });
-    }
+      }
 }
 
 module.exports = {

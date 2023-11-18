@@ -9,7 +9,11 @@ const photoSchema = new Schema({
         required: true
     },
     tags: {
-        type: String
+        type: Array
+    },
+    userID: {
+        type: String,
+        required: true
     }
 }, { timestamps: true })
 

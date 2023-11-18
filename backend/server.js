@@ -1,15 +1,23 @@
 require('dotenv').config()
-
+const session = require('express-session');
 const express = require('express')
+const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose')
-const employeeRoutes = require('./routes/employees')
-const verifyEmailRoutes = require('./routes/verifyEmail');
-const userRoutes = require('./routes/users');
 const photoRoutes = require('./routes/photos')
+const authRoutes = require('./routes/auth')
+const userRoutes = require('./routes/users');
 
-//Express App is started
+// Express App is started
 const app = express() 
-
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+app.use(express.json({ limit: '10mb' })) // attaches json to requests
+// Session Declaration
+app.use(session({
+    secret: 'JBwFVv2W##24D1H!kv%e6%43uV%bY1#CN78S9L9uwP1@RH*HXQ', // <--- this key will have to removed later
+    resave: false,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+}));
 // Debugging Scripts Runs on every request, logging each request
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.json({ limit: '10mb' })) // attaches json to requests
@@ -17,15 +25,13 @@ app.use((req,res,next) =>{
     console.log(req.path,req.method)
     next()
 })
-
-//routes
-app.use('/api/employees',employeeRoutes)
+// Login routes go here <-----
+app.use('/profile',authRoutes) //middleware
+app.use('/profile/photos',photoRoutes)
 app.use('/api/verify-email', verifyEmailRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/photos',photoRoutes)
 
-
-// connect to db
+// Connect to db
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         //Listen For requests on a given port
@@ -37,7 +43,30 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((error) => {
         console.log(error)
     })
-//get request handler for get on /
-app.get('/', (req, res) => {
-    res.json({msg: "Get req detected successfuly"})
-})
+
+
+
+// FOR Frontend, run this on the file before sending it to the DB
+// function convertToBase64(file){
+//     return new Promise((resolve,reject) =>{
+//         const fileReader = new FileReader()
+//         fileReader.readAsDataURL(file);
+//         fileReader.onload  = () => {
+//             resolve(fileReader.result)
+//         };
+//         fileReader.onerror = (error) => {
+//             reject(error)
+//         }
+//     })
+// }
+
+// FOR PABLO
+// app.post('/login', (req, res) => {
+//     // Assuming user is an instance of your User model
+//     const userId = user._id;
+    
+//     // Store user ID in the session
+//     req.session.userId = userId;
+  
+//     res.send('Login successful');
+//   });
