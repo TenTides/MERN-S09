@@ -59,14 +59,3 @@ mongoose.connect(process.env.MONGO_URI)
 //         }
 //     })
 // }
-
-// FOR PABLO
-// app.post('/login', (req, res) => {
-//     // Assuming user is an instance of your User model
-//     const userId = user._id;
-    
-//     // Store user ID in the session
-//     req.session.userId = userId;
-  
-//     res.send('Login successful');
-//   });
