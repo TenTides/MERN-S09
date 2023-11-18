@@ -12,12 +12,12 @@ const app = express()
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.json({ limit: '10mb' })) // attaches json to requests
 // Session Declaration
-app.use(session({
-    secret: 'JBwFVv2W##24D1H!kv%e6%43uV%bY1#CN78S9L9uwP1@RH*HXQ', // <--- this key will have to removed later
-    resave: false,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
-}));
+// app.use(session({
+//     secret: 'JBwFVv2W##24D1H!kv%e6%43uV%bY1#CN78S9L9uwP1@RH*HXQ', // <--- this key will have to removed later
+//     resave: false,
+//     saveUninitialized: true,
+//     store: new MongoStore({ mongooseConnection: mongoose.connection }),
+// }));
 // Debugging Scripts Runs on every request, logging each request
 app.use(express.json()) // attaches json to requests
 app.use((req,res,next) =>{
@@ -25,7 +25,7 @@ app.use((req,res,next) =>{
     next()
 })
 // Login routes go here <-----
-app.use('/profile',authRoutes) //middleware
+//app.use('/profile',authRoutes) //middleware
 app.use('/profile/photos',photoRoutes)
 
 
