@@ -1,16 +1,13 @@
 import { useState } from "react"
 import { useEmployeesContext } from "../hooks/useEmployeesContext"
+import './EmployeeForm.css'
 
-
-const EmployeeForm = () =>
+const EmployeeForm = ({onClose}) =>
 {   
     const {dispatch} = useEmployeesContext()
 
-    const [name, setName] = useState('')
-    const [position, setPosition] = useState('')
-    const [employer, setEmployer] = useState('')
     const [file, setFile] = useState('')
-    const [type, setType] = useState('')
+    const [tags, setTags] = useState('')
     const [error, setError] = useState('')
 
     const handleFileChange = async (e) => 
@@ -34,10 +31,10 @@ const EmployeeForm = () =>
 
     const handleNewbie = async (e) =>{
         e.preventDefault()
-        const employee = {name, position, employer, file, type}
-        const response = await fetch('/api/employees',{
+        const photo = {file, tags}
+        const response = await fetch('/api/photos',{
             method: 'POST',
-            body: JSON.stringify(employee),
+            body: JSON.stringify(photo),
             headers:
             {
                 'Content-Type': 'application/json'
@@ -50,31 +47,44 @@ const EmployeeForm = () =>
         }
         if(response.ok)
         {
-            setName('')
-            setEmployer('')
-            setPosition('')
             setFile('')
-            setType('')
+            setTags('')
             setError(null)
-            console.log('New Employee Added', json)
+            console.log('New Photo Added', json)
             dispatch({type:"CREATE_EMPLOYEE",payload: json})
+
+            try {
+                const response = await fetch('/api/photos');
+                const updatedJson = await response.json();
+                if (response.ok) {
+                  dispatch({ type: 'SET_PHOTOS', payload: updatedJson });
+                } else {
+                  console.error('Error fetching photos after upload:', updatedJson.error);
+                }
+              } catch (error) {
+                console.error('Error fetching photos after upload:', error.message);
+              }
+
+            onClose();
         }
     }
 
+    const handleClose = () => {
+        setFile("");
+        setTags("");
+        setError(null);
+        onClose();
+      };
+
     return (
         <form className="create" onSubmit={handleNewbie}>
-            <h3>Add a New Employee</h3>
-            <label>Name:</label>
-            <input type="text" onChange={(e) => setName(e.target.value)} value={name}/>
-            <label>Position:</label>
-            <input type="text" onChange={(e) => setPosition(e.target.value)} value={position}/>
-            <label>Employer:</label>
-            <input type="text" onChange={(e) => setEmployer(e.target.value)} value={employer}/>
-            <label htmlFor="file-upload" className="custom-file-upload">Profile Photo:</label>
+            <h3>Add a New Photo</h3>
+            <span className="closebtn" onClick={handleClose}>&times;</span>
+            <label htmlFor="file-upload" className="custom-file-upload">Source:</label>
             <input type="file" name = "myFile" id = "file-upload" accept=".jpeg, .png, .jpg" onChange={handleFileChange}/>
-            <label>Rank of Employment:</label>
-            <input type="text" onChange={(e) => setType(e.target.value)} value={type}/>
-            <button type="submit">Add Employee</button>
+            <label>Tags:</label>
+            <input type="text" onChange={(e) => setTags(e.target.value)} value={tags}/>
+            <button type="submit">Add Photo</button>
             {error && <div className ="error">{error}</div>}
         </form>
     )

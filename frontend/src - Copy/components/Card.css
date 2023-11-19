@@ -1,0 +1,18 @@
+.card {
+  max-width: 13vw;
+  min-height: 10vw;
+  min-height: 10vh;
+  max-height: 30vh;
+  /* background-color: #fff; */
+  border-radius: 7px;
+  margin-right: 3vw;
+  margin-bottom: 4vh;
+  
+}
+
+.card img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 7px;
+}

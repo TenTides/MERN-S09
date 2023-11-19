@@ -9,8 +9,12 @@ const photoSchema = new Schema({
         required: true
     },
     tags: {
-        type: String
-    }
+        type: Array
+    },
+    // userID: { // When session is avalible 
+    //     type: String,
+    //     required: true
+    // }
 }, { timestamps: true })
 
 //model creates collection in the database if not there already

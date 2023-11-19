@@ -1,0 +1,120 @@
+.body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+
+.s_nav {
+  background-color: #1D1F23;
+  color: #fff;
+  height: max(8vh, 40px);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #363638;
+  position: fixed;
+}
+
+.s_nav .logo {
+  font-size: 32px;
+  margin-right: auto;
+  margin-left: 1vw;
+}
+
+
+.s_nav input{
+  width: 25vw;
+  height: max(5vh, 35px);
+  outline: 1px solid #fff;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: transparent;
+  font-size: 24px;
+  padding: 10px;
+  color: #fff;
+  font-family: 'IBM Plex Mono', monospace;
+  margin-left: 6vw;
+}
+
+
+
+.s_nav .help {
+  font-size: 22px;
+  margin-left: 2vw;
+}
+
+.s_nav .profile {
+  display: flex;
+  font-size: 24px;
+  width: 15px;
+  height: 15px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  padding: max(2vh, 1vw);
+  margin-left: auto;
+  margin-right: 2vw;
+}
+
+.Main {
+  margin-top: 8vh;
+  background-color: #1D1F23;
+  height: 200vh;
+  width: 100vw;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  padding: 55px;
+  /* border: 1px solid red; */
+}
+
+.today .heading {
+  color: #fff;
+  font-size: 30px;
+}
+
+nav button {
+  margin-left: 2vw;
+  font-size: 22px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 0.9vh;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+nav button:hover {
+  text-decoration: underline;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #363638 #1D1F23;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #333;
+}
+
+*::-moz-scrollbar-thumb {
+  background-color: #333;
+}
+
+
+/* fade in images once page is loaded */
+.fade-in {
+  opacity: 0;
+  transition: opacity 3s ease-in-out;
+}
+
+.fade-in.active{
+  opacity: 1;
+}

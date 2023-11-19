@@ -5,10 +5,14 @@ export const EmployeesContext = createContext()
 export const employeesReducer = (state, action) => 
 {
     switch (action.type) {
-        case 'SET_EMPLOYEES':
+        case 'SET_PHOTOS':
             return {employees: action.payload}
-        case 'CREATE_EMPLOYEE':
-            return {employees: [action.payload,...state.employees]}
+        case 'CREATE_PHOTO':
+            return {photo: [action.payload,...state.employees]}
+        case 'DELETE_PHOTO':
+            return {
+                    photos: state.photos.filter((photo) => photo._id !== action.payload),
+                };
         default:
             return state
     }
