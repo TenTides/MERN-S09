@@ -1,11 +1,12 @@
 require('dotenv').config()
 const session = require('express-session');
 const express = require('express')
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose')
 const photoRoutes = require('./routes/photos')
-const authRoutes = require('./routes/auth')
+// const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/users');
+const verifyEmailRoutes = require('./routes/verifyEmail');
 
 // Express App is started
 const app = express() 
@@ -13,24 +14,30 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.json({ limit: '10mb' })) // attaches json to requests
 // Session Declaration
 app.use(session({
-    secret: 'JBwFVv2W##24D1H!kv%e6%43uV%bY1#CN78S9L9uwP1@RH*HXQ', // <--- this key will have to removed later
+    secret: 'JBwFVv2W##24D1H!kv%e6%43uV%bY1#CN78S9L9uwP1@RH*HXQ',
     resave: false,
     saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: new MongoStore({ 
+        mongoUrl: process.env.MONGO_URI
+    })
 }));
 // Debugging Scripts Runs on every request, logging each request
-app.use(express.urlencoded({ limit: '10mb', extended: true }));
-app.use(express.json({ limit: '10mb' })) // attaches json to requests
 app.use((req,res,next) =>{
     console.log(req.path,req.method)
     next()
 })
 // Login routes go here <-----
-app.use('/profile',authRoutes) //middleware
+// app.use('/profile',authRoutes) //middleware
 app.use('/profile/photos',photoRoutes)
 app.use('/api/verify-email', verifyEmailRoutes);
 app.use('/api/users', userRoutes);
 
+app.get('/api/session', (req, res) => {
+    const sessionData = {
+        userId: req.session.userId,
+    };
+    res.json(sessionData);
+});
 // Connect to db
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {

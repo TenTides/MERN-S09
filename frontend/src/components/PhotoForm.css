@@ -1,0 +1,31 @@
+form {
+  background-color: #1D1F23;
+  border: 1px solid #fff;
+  color: #fff;
+  width: 30vw;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 8px;
+  z-index: 2;
+}
+
+form button {
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+
+form h3 {
+  text-align: center;
+}
+
+.closebtn {
+  font-size: 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 15px;
+  cursor: pointer;
+}

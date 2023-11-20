@@ -3,9 +3,10 @@ const mongoose = require('mongoose')
 // get ALL records
 const getPhotos= async(req,res) =>
 {
-    const records = await photos.find({userID: req.session.userID}).sort({createdAt: -1})
+    const records = await photos.find({userID: req.session.userId}).sort({createdAt: -1})
     res.status(200).json(records)
-}
+} 
+
 // get single record
 const getSinglePhoto = async(req,res) =>
 {
@@ -24,6 +25,7 @@ const getSinglePhoto = async(req,res) =>
 // create new record
 const createPhoto = async(req,res) =>
 {
+    console.log('OK');
     const {file,tags,userID} = req.body
     // add doc to db
     try {
