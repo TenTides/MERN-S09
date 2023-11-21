@@ -25,8 +25,8 @@ const getSinglePhoto = async(req,res) =>
 // create new record
 const createPhoto = async(req,res) =>
 {
-    console.log('OK');
-    const {file,tags,userID} = req.body
+    var {file,tags,userID} = req.body
+    tags = tags.split(' ').map(tag => tag.trim());
     // add doc to db
     try {
         const newPhoto = await photos.create({file,tags,userID})
@@ -41,16 +41,15 @@ const createPhoto = async(req,res) =>
 const deletePhoto = async(req,res) =>
 {
     const {id} = req.params
-    if(!mongoose.Types.ObjectId.isValid(id)|| !mongoose.Types.ObjectId.isValid(req.session.userID)){
+    if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No Such Employee For given ID'})
     }
-    const record = await photos.findOneAndDelete({_id: id, userID: req.session.userID})
+    const record = await photos.findOneAndDelete({_id: id, userID: req.session.userId})
     if(!record)
     {
-        return res.status(400).json({error: 'No Such Employee For given ID'})
+        return res.status(400).json({error: 'No Such Employee For given ID2'})
     }
     res.status(200).json(record)
-
 }
 
 const updatePhoto = async(req,res) =>
@@ -69,33 +68,52 @@ const updatePhoto = async(req,res) =>
 
 // search records
 const searchPhotos = async (req, res) => {
-    const searchField = req.body.fieldName; // The field you want to search
-    const searchValue = req.body.fieldValue; // The value to search for
-    
+    const searchField = req.body.fieldName;
+    let searchValue = req.body.fieldValue;
+
+    console.log('Search Field:', searchField);
+    console.log('Search Value:', searchValue);
+
+    if (!searchValue) {
+        try {
+            const allRecords = await photos.find({ userID: req.session.userId }).sort({ createdAt: -1 });
+            res.status(200).json(allRecords);
+        } catch (err) {
+            return res.status(500).json({ error: 'An error occurred while fetching all records' });
+        }
+        return;
+    }
+
     // Create a regular expression to perform a wildcard search
     const searchRegex = new RegExp(searchValue, 'i'); // 'i' for case-insensitive search
-    
+
     if (searchField === 'tags') {
-        searchValue = searchValue.split(',').map((tag) => tag.trim());
-      }
-      try {
-        const query = { userID: req.session.userID };
-        if (searchField === 'tags') {
-          query[searchField] = { $in: searchValue };
-        } else {
-          query[searchField] = searchRegex;
+        searchValue = searchValue.split(' ').map((tag) => tag.trim());
+    }
+
+    try {
+        // Initial query object with userID condition
+        const query = { userID: req.session.userId };
+
+        // Extend the query object based on the search field
+        if (searchValue && searchField === 'tags') {
+            query[searchField] = { $in: searchValue };
+        } else if (searchValue) {
+            query[searchField] = searchRegex;
         }
-    
-        const records = await photos.find(query);
+
+        // Combine userID condition and search condition
+        const records = await photos.find(query).sort({ createdAt: -1 });
+        console.log(records.length);
         if (records.length === 0) {
-          return res.status(400).json({ error: 'No matching records found' });
+            return res.status(400).json({ error: 'No matching records found' });
         }
+
         res.status(200).json(records);
-      } 
-      catch (err) {
+    } catch (err) {
         return res.status(500).json({ error: 'An error occurred while searching records' });
-      }
-}
+    }
+};
 
 module.exports = {
     createPhoto,

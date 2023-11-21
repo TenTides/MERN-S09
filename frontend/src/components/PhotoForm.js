@@ -31,6 +31,7 @@ const PhotoForm = ({onClose, userID}) =>
 
     const handleNewbie = async (e) =>{
         e.preventDefault()
+        
         const photo = {file, tags, userID}
         const response = await fetch('/profile/photos',{
             method: 'POST',
@@ -51,7 +52,7 @@ const PhotoForm = ({onClose, userID}) =>
             setTags('')
             setError(null)
             console.log('New Photo Added', json)
-            dispatch({type:"CREATE_PHOTO",payload: json})
+            // dispatch({type:"CREATE_PHOTO",payload: json})
 
             try {
                 const response = await fetch('/profile/photos');

@@ -12,6 +12,8 @@ const Images = () => {
   const [fadeIn, setFadeIn] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [isCardEnlarged, setIsCardEnlarged] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [allPhotos, setAllPhotos] = useState([]);
   
   useEffect(() => {
     fetch('/api/session')
@@ -38,6 +40,8 @@ const Images = () => {
   
       const json = await response.json();
       if (response.ok) {
+        setAllPhotos(json);
+        console.log("all photos", json)
         dispatch({ type: 'SET_PHOTOS', payload: json });
         console.log(json);
         setLoading(false);
@@ -77,13 +81,13 @@ const Images = () => {
 
   const handleDelete = async (photoId) => {
     try {
-      const response = await fetch(`/api/photos/${photoId}`, {
+      const response = await fetch(`/profile/photos/${photoId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
         },
       });
-  
+
       if (response.ok) {
         dispatch({ type: 'DELETE_PHOTO', payload: photoId });
 
@@ -91,10 +95,34 @@ const Images = () => {
         dispatch({ type: 'SET_PHOTOS', payload: updatedPhotos });
       } else {
         const data = await response.json();
-        console.error('Error deleting photo:', data.error);
+        console.error('Error deleting photo!:', data.error);
       }
     } catch (error) {
       console.error('Error deleting photo:', error.message);
+    }
+  };
+
+  const handleSearch = async () => {
+    try {
+      const response = await fetch('/profile/photos/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fieldName: 'tags', // or another field you want to search
+          fieldValue: searchQuery,
+        }),
+      });
+  
+      if (response.ok) {
+        const json = await response.json();
+        dispatch({ type: 'SET_PHOTOS', payload: json });
+      } else {
+        console.error('Error searching photos:', response);
+      }
+    } catch (error) {
+      console.error('Error searching photos:', error.message);
     }
   };
 
@@ -102,7 +130,18 @@ const Images = () => {
     <div className='body'>
       <nav className='s_nav'>
         <div className="logo">#Photo4u</div>
-        <div className='search'><input type="text" /></div>
+        <div className='search'>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch();
+            }
+          }}
+        />
+        </div>
         <button onClick={handleUploadButtonClick}>
           <div className="upload">Upload</div>
         </button>
