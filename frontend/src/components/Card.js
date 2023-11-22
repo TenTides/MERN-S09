@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './Card.css';
 
-const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onClickOutside, isSelected }) => {
+const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onClickOutside, isSelected, onDeleteTag, onAddTag }) => {
   const [isEnlarged, setIsEnlarged] = useState(false);
-  
+  const [showTagInput, setTagInput] = useState(false);
 
   const handleWrapperClick = (event) => {
     if (isEnlarged) {
@@ -25,8 +25,17 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
   }
 
   const deleteTag = (index) => {
-    console.log("deleting" + index);
+    onDeleteTag(photoId, index);
   }
+
+  const openTagInput = () => {
+    setTagInput(true);
+  };
+
+  const addTag = (index) => {
+    onAddTag(photoId, tags);
+    setTagInput(false);
+  };
 
   const colors = ['#54d676', '#70dbe0', '#ebeb94', '#d68c69', '#b281e3', '#eb7f8d']
   const getColor = () => {
@@ -52,8 +61,18 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
                 <button onClick={() => deleteTag(index)}>&times;</button>
               </span>
             ))}
+            {showTagInput && <input
+              id="addTagInput" 
+              type="text" 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  addTag();
+                }
+              }}
+            />}
+            {!showTagInput && <button id="addTagBtn" onClick={openTagInput}>+</button>}
           </div>
-          <button onClick={handleDeleteClick}>Delete</button>
+          <button className='deleteBtn' onClick={handleDeleteClick}>Delete Image</button>
         </div>
       )}
     </div>

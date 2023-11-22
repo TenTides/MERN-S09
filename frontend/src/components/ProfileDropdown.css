@@ -1,0 +1,22 @@
+.profile-dropdown {
+  border: 1px solid white;
+  width: 300px;
+  height: 150px;
+  position: absolute;
+  top: 105%;
+  right: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: rgba(220, 220, 220, 0.025);
+}
+
+.profile-dropdown #email {
+  margin-bottom: 10%;
+}
+
+.profile-dropdown button {
+  margin: 0 auto;
+}

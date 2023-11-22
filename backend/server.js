@@ -4,7 +4,7 @@ const express = require('express')
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose')
 const photoRoutes = require('./routes/photos')
-// const authRoutes = require('./routes/auth')
+
 const userRoutes = require('./routes/users');
 const verifyEmailRoutes = require('./routes/verifyEmail');
 
@@ -27,7 +27,7 @@ app.use((req,res,next) =>{
     next()
 })
 // Login routes go here <-----
-// app.use('/profile',authRoutes) //middleware
+
 app.use('/profile/photos',photoRoutes)
 app.use('/api/verify-email', verifyEmailRoutes);
 app.use('/api/users', userRoutes);
@@ -38,6 +38,18 @@ app.get('/api/session', (req, res) => {
     };
     res.json(sessionData);
 });
+
+app.post('/api/logout', (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+      } else {
+        res.json({ message: 'Logout successful' });
+      }
+    });
+  });
+
 // Connect to db
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
@@ -50,19 +62,3 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((error) => {
         console.log(error)
     })
-
-
-
-// FOR Frontend, run this on the file before sending it to the DB
-// function convertToBase64(file){
-//     return new Promise((resolve,reject) =>{
-//         const fileReader = new FileReader()
-//         fileReader.readAsDataURL(file);
-//         fileReader.onload  = () => {
-//             resolve(fileReader.result)
-//         };
-//         fileReader.onerror = (error) => {
-//             reject(error)
-//         }
-//     })
-// }

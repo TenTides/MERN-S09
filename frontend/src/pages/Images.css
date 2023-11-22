@@ -128,3 +128,11 @@ nav button:hover {
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
   z-index: 1; /* Ensure the overlay is above other elements */
 }
+
+.profile:hover {
+  outline: 1.5px solid rgba(255, 255, 255, 0.8);
+}
+
+.profile:active {
+  outline: 1.5px solid rgba(255, 255, 255, 1);
+}

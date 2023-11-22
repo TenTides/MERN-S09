@@ -37,12 +37,23 @@
 }
 
 .editCard {
-  background-color: white;
+  /* background-color: white; */
+}
+
+.editCard .deleteBtn {
+  background-color: red;
+  border: none;
+  padding: 6px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .tags {
   z-index: 999;
 }
+
+
 
 .tag {
   /* background-color: red; */
@@ -54,4 +65,25 @@
   background-color: transparent;
   border: none;
   font-size: 16px;
+}
+
+.tags #addTagbtn {
+  background-color: #8dd9fc;
+  border: none;
+  padding: 1px;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 2px 5px;
+}
+
+.tags #addTaginput {
+  background-color: #8dd9fc;
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+}
+
+.tags #addTaginput:focus {
+  outline: none;
+  border: none;
 }

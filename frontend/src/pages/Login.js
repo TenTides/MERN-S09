@@ -1,39 +1,11 @@
 import React, { useState } from 'react';
-import './Account.css';
+import './Login.css';
 import { useNavigate } from 'react-router-dom';
 
-const Account = () => {
-    const [registerEmail, setRegisterEmail] = useState('');
-    const [registerPassword, setRegisterPassword] = useState('');
+const Login = () => {
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const navigate = useNavigate();
-
-    const handleRegisterSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await fetch('/api/users', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: registerEmail,
-                    password: registerPassword,
-                }),
-            });
-
-            if (response.ok) {
-                console.log("reg");
-            } else {
-                const data = await response.json();
-                console.error(data.message);
-            }
-        } catch (error) {
-            console.error('Error during registration:', error);
-        }
-    };
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
@@ -67,11 +39,6 @@ const Account = () => {
 
     return (
         <div className='forms'>
-            <form className='register' onSubmit={handleRegisterSubmit}>
-                <input type="email" value={registerEmail} onChange={e => setRegisterEmail(e.target.value)} placeholder="Register email" />
-                <input type="password" value={registerPassword} onChange={e => setRegisterPassword(e.target.value)} placeholder="Register password" />
-                <button type="submit">Register</button>
-            </form>
             <form className='login' onSubmit={handleLoginSubmit}>
                 <input type="email" value={loginEmail} onChange={e => setLoginEmail(e.target.value)} placeholder="Login email" />
                 <input type="password" value={loginPassword} onChange={e => setLoginPassword(e.target.value)} placeholder="Login password" />
@@ -81,6 +48,6 @@ const Account = () => {
     );
 };
 
-export default Account;
+export default Login;
 
 

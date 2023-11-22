@@ -3,6 +3,8 @@ import './Images.css';
 import CardGroup from '../components/CardGroup';
 import { usePhotosContext } from "../hooks/usePhotosContext";
 import PhotoForm from "../components/PhotoForm";
+import ProfileDropdown from '../components/ProfileDropdown';
+import { useNavigate } from 'react-router-dom';
 
 const Images = () => {
   const [userId, setUserId] = useState(null);
@@ -14,13 +16,19 @@ const Images = () => {
   const [isCardEnlarged, setIsCardEnlarged] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [allPhotos, setAllPhotos] = useState([]);
-  
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const navigate = useNavigate();  
+
   useEffect(() => {
     fetch('/api/session')
       .then((response) => response.json())
       .then((data) => {
-        setUserId(data.userId);
-        console.log('Token from session:', data.userId);
+        if (data.userId) {
+          setUserId(data.userId);
+          console.log('Token from session:', data.userId);
+        } else {
+          navigate('/login');
+        }
       })
       .catch((error) => console.error('Error fetching session data:', error));
   }, []);
@@ -126,6 +134,100 @@ const Images = () => {
     }
   };
 
+  
+const deleteTag = async (photoId, tagIndex) => {
+  try {
+    const response = await fetch(`/profile/photos/${photoId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tags: { index: tagIndex, action: 'delete' },
+      }),
+    });
+
+    if (response.ok) {
+      const updatedPhotos = photos.map(photo => {
+        if (photo._id === photoId) {
+          const updatedTags = [...photo.tags];
+          updatedTags.splice(tagIndex, 1);
+          return { ...photo, tags: updatedTags };
+        }
+        return photo;
+      });
+      dispatch({ type: 'SET_PHOTOS', payload: updatedPhotos });
+    } else {
+      const data = await response.json();
+      console.error('Error updating photo tags:', data.error);
+    }
+  } catch (error) {
+    console.error('Error updating photo tags:', error.message);
+  }
+};
+
+const addTag = async (photoId, tagIndex) => {
+  try {
+    const response = await fetch(`/profile/photos/${photoId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tags: { index: tagIndex, action: 'delete' },
+      }),
+    });
+
+    if (response.ok) {
+      const updatedPhotos = photos.map(photo => {
+        if (photo._id === photoId) {
+          const updatedTags = [...photo.tags];
+          updatedTags.splice(tagIndex, 1);
+          return { ...photo, tags: updatedTags };
+        }
+        return photo;
+      });
+      dispatch({ type: 'SET_PHOTOS', payload: updatedPhotos });
+    } else {
+      const data = await response.json();
+      console.error('Error updating photo tags:', data.error);
+    }
+  } catch (error) {
+    console.error('Error updating photo tags:', error.message);
+  }
+};
+
+const handleProfileButtonClick = async () => {
+  setIsProfileDropdownOpen(true);
+};
+
+const handleLogout = async () => {
+  try {
+    const response = await fetch('/api/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      clearSession();
+      setUserId(null);
+      console.log('Logout successful');
+    } else {
+      const data = await response.json();
+      console.error('Error logging out:', data.error);
+    }
+  } catch (error) {
+    console.error('Error logging out:', error.message);
+  }
+};
+
+const clearSession = () => {
+  setUserId(null);
+  navigate('/account');
+};
+
   return (
     <div className='body'>
       <nav className='s_nav'>
@@ -146,7 +248,12 @@ const Images = () => {
           <div className="upload">Upload</div>
         </button>
         <div className="help">Help</div>
-        <div className="profile">J</div>
+        <div className="profile"  onClick={handleProfileButtonClick}>
+          <div className="profile-button">
+            J
+          </div>
+          {isProfileDropdownOpen && <ProfileDropdown onLogout={handleLogout} />}
+        </div>
       </nav>
       <div className='Main'>
         {showForm && (
@@ -166,6 +273,8 @@ const Images = () => {
                   onDeleteClick={handleDelete}
                   selectedCard={selectedCard}  
                   onClickOutside={handleCloseEnlargedCard}
+                  onDeleteTag={deleteTag}
+                  onAddTag={addTag}
                 />
               ) : (
                 <p>No images found</p>

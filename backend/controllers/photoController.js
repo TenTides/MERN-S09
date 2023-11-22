@@ -52,19 +52,36 @@ const deletePhoto = async(req,res) =>
     res.status(200).json(record)
 }
 
-const updatePhoto = async(req,res) =>
-{
-    const {id} = req.params
-    if(!mongoose.Types.ObjectId.isValid(id) || !mongoose.Types.ObjectId.isValid(req.session.userID)){
-        return res.status(404).json({error: 'No Such Employee For given ID'})
+const updatePhoto = async (req, res) => {
+    const { id } = req.params;
+    const { tags } = req.body;
+  
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'No Such Employee For given ID1' });
     }
-    const record = await photos.findOneAndUpdate({_id: id, userID: req.session.userID},{...req.body})
-    if(!record)
-    {
-        return res.status(400).json({error: 'No Such Employee For given ID'})
+  
+    try {
+      const photo = await photos.findOne({ _id: id, userID: req.session.userId });
+  
+      if (!photo) {
+        return res.status(400).json({ error: 'No Such Employee For given ID2' });
+      }
+  
+      if (tags && tags.action === 'delete') {
+        // Remove the tag at the specified index
+        const tagIndex = tags.index;
+        photo.tags.splice(tagIndex, 1);
+      }
+  
+      // Update other fields as needed
+  
+      const updatedPhoto = await photo.save();
+      res.status(200).json(updatedPhoto);
+    } catch (error) {
+      console.error('Error updating photo:', error.message);
+      res.status(500).json({ error: 'An error occurred while updating the photo' });
     }
-    res.status(200).json(record)
-}
+  };
 
 // search records
 const searchPhotos = async (req, res) => {
@@ -105,10 +122,6 @@ const searchPhotos = async (req, res) => {
         // Combine userID condition and search condition
         const records = await photos.find(query).sort({ createdAt: -1 });
         console.log(records.length);
-        if (records.length === 0) {
-            return res.status(400).json({ error: 'No matching records found' });
-        }
-
         res.status(200).json(records);
     } catch (err) {
         return res.status(500).json({ error: 'An error occurred while searching records' });
