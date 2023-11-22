@@ -1,31 +1,21 @@
 .Home {
   text-align: center;
   background-color: #1D1F23;
-  width: 100vw;
+  width: 97vw;
   height: 300vh;
   position: relative;
-  overflow-x: hidden;
-  
+  overflow-x: hidden;  
 }
 
 .Landing {
   margin-top: 200px;
   display: flex;
   justify-content: center;
+	flex-direction: column;
 }
 
 
 /* animation for cards */
-
-@keyframes firstMove {
-  from{
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100px);
-  }
-}
-
 
 .square {
   width: 100px;
@@ -52,5 +42,73 @@
 }
 
 .animation-box .card {
-  width: 400px;
+  width: 30vw;
+	height: 30vh;
+	transition: transform 0.8s ease-in-out;
+}
+
+.anitext {
+	color: #fff;
+	font-size: 40px;
+	width: 100vw;
+}
+
+.cardOneFirstMove{
+	transform: translateX(205px);
+}
+
+
+.cardTwoFirstMove{
+	transform: translateY(15px);
+	
+}
+
+.cardThreeFirstMove{
+	transform: translateX(-205px) translateY(30px);
+}
+
+.float-cards {
+	display: none;
+}
+
+.float-cards .display {
+	display: block;
+	width: 90vw;
+	height: 30vh;
+	position: relative;
+	/* background-color: red; */
+}
+
+.float-cards .display .card {
+	width: 50px;
+	height: 70px;
+	position: absolute;
+	transition: transform 5s ease, left 5s ease, top 5s ease;
+}
+
+
+.upbtn, .downbtn {
+	width: 75px;
+	height: 75px;
+	padding: 30px;
+	border-radius: 50%;
+	font-size: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 7%;
+	border: none;
+}
+
+.upbtn:hover, .downbtn:hover {
+	scale: 1.01;
+}
+
+.upbtn:active, .downbtn:active {
+	background-color: #e8e8e8;
+	scale: 0.99;
+}
+
+.downbtn {
+	rotate: 180deg;
 }

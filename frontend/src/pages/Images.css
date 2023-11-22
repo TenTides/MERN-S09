@@ -39,13 +39,7 @@
   margin-left: 6vw;
 }
 
-.s_nav .upload { 
-  margin-left: 2vw;
-  font-size: 22px;
-  border: 1px solid #fff;
-  border-radius: 5px;
-  padding: 0.9vh;
-}
+
 
 .s_nav .help {
   font-size: 22px;
@@ -86,21 +80,51 @@
   font-size: 30px;
 }
 
+nav button {
+  margin-left: 2vw;
+  font-size: 22px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 0.9vh;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
 
-
-
+nav button:hover {
+  text-decoration: underline;
+}
 
 * {
-  scrollbar-width: thin; /* "auto" or "thin" for Firefox */
-  scrollbar-color: #363638 #1D1F23; /* Scrollbar color (thumb and track) */
+  scrollbar-width: thin;
+  scrollbar-color: #363638 #1D1F23;
 }
 
-/* Style the scrollbar thumb */
 *::-webkit-scrollbar-thumb {
-  background-color: #333; /* Thumb color for non-Firefox browsers (e.g., Chrome) */
+  background-color: #333;
 }
 
-/* Style the scrollbar thumb */
 *::-moz-scrollbar-thumb {
-  background-color: #333; /* Thumb color for Firefox */
+  background-color: #333;
+}
+
+
+/* fade in images once page is loaded */
+.fade-in {
+  opacity: 0;
+  transition: opacity 3s ease-in-out;
+}
+
+.fade-in.active{
+  opacity: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+  z-index: 1; /* Ensure the overlay is above other elements */
 }

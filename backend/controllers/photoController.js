@@ -3,9 +3,14 @@ const mongoose = require('mongoose')
 // get ALL records
 const getPhotos= async(req,res) =>
 {
+<<<<<<< HEAD
     const records = await photos.find({}).sort({createdAt: -1})
+=======
+    const records = await photos.find({userID: req.session.userId}).sort({createdAt: -1})
+>>>>>>> d5b779ad1a9351f0b471813126622b6aa6ae8c2c
     res.status(200).json(records)
-}
+} 
+
 // get single record
 const getSinglePhoto = async(req,res) =>
 {
@@ -24,7 +29,12 @@ const getSinglePhoto = async(req,res) =>
 // create new record
 const createPhoto = async(req,res) =>
 {
+<<<<<<< HEAD
     const {file,tags} = req.body
+=======
+    var {file,tags,userID} = req.body
+    tags = tags.split(' ').map(tag => tag.trim());
+>>>>>>> d5b779ad1a9351f0b471813126622b6aa6ae8c2c
     // add doc to db
     try {
         const newPhoto = await photos.create({file,tags})
@@ -42,13 +52,16 @@ const deletePhoto = async(req,res) =>
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No Such Employee For given ID'})
     }
+<<<<<<< HEAD
     const record = await photos.findOneAndDelete({_id: id})
+=======
+    const record = await photos.findOneAndDelete({_id: id, userID: req.session.userId})
+>>>>>>> d5b779ad1a9351f0b471813126622b6aa6ae8c2c
     if(!record)
     {
-        return res.status(400).json({error: 'No Such Employee For given ID'})
+        return res.status(400).json({error: 'No Such Employee For given ID2'})
     }
     res.status(200).json(record)
-
 }
 
 const updatePhoto = async(req,res) =>
@@ -67,13 +80,27 @@ const updatePhoto = async(req,res) =>
 
 // search records
 const searchPhotos = async (req, res) => {
-    const searchField = req.body.fieldName; // The field you want to search
-    const searchValue = req.body.fieldValue; // The value to search for
-    
+    const searchField = req.body.fieldName;
+    let searchValue = req.body.fieldValue;
+
+    console.log('Search Field:', searchField);
+    console.log('Search Value:', searchValue);
+
+    if (!searchValue) {
+        try {
+            const allRecords = await photos.find({ userID: req.session.userId }).sort({ createdAt: -1 });
+            res.status(200).json(allRecords);
+        } catch (err) {
+            return res.status(500).json({ error: 'An error occurred while fetching all records' });
+        }
+        return;
+    }
+
     // Create a regular expression to perform a wildcard search
     const searchRegex = new RegExp(searchValue, 'i'); // 'i' for case-insensitive search
-    
+
     if (searchField === 'tags') {
+<<<<<<< HEAD
         searchValue = searchValue.split(',').map((tag) => tag.trim());
       }
       try {
@@ -82,18 +109,34 @@ const searchPhotos = async (req, res) => {
           query[searchField] = { $in: searchValue };
         } else {
           query[searchField] = searchRegex;
+=======
+        searchValue = searchValue.split(' ').map((tag) => tag.trim());
+    }
+
+    try {
+        // Initial query object with userID condition
+        const query = { userID: req.session.userId };
+
+        // Extend the query object based on the search field
+        if (searchValue && searchField === 'tags') {
+            query[searchField] = { $in: searchValue };
+        } else if (searchValue) {
+            query[searchField] = searchRegex;
+>>>>>>> d5b779ad1a9351f0b471813126622b6aa6ae8c2c
         }
-    
-        const records = await photos.find(query);
+
+        // Combine userID condition and search condition
+        const records = await photos.find(query).sort({ createdAt: -1 });
+        console.log(records.length);
         if (records.length === 0) {
-          return res.status(400).json({ error: 'No matching records found' });
+            return res.status(400).json({ error: 'No matching records found' });
         }
+
         res.status(200).json(records);
-      } 
-      catch (err) {
+    } catch (err) {
         return res.status(500).json({ error: 'An error occurred while searching records' });
-      }
-}
+    }
+};
 
 
 
