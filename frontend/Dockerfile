@@ -2,16 +2,16 @@
 FROM node:latest as builder
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /MERN-S09/frontend
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
 # Install frontend dependencies
-RUN npm install --lts
+#RUN npm install --lts
 
 # Copy the frontend application code to the container
-COPY . .
+#COPY . .
 
 # Build the frontend application
 RUN npm run build
@@ -22,5 +22,8 @@ FROM nginx:alpine
 # Copy the built app from the builder stage to the Nginx public directory
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 
-# Expose port 80 for the frontend
+# Expose port for the frontend
 EXPOSE 80
+
+# Command to run the frontend server
+CMD ["npm", "start"]
