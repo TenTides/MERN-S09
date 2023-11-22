@@ -25,4 +25,6 @@ router.patch('/:id', updatePhoto)
 router.post('/search', searchPhotos)
 // Delete
 
+
+
 module.exports = router 

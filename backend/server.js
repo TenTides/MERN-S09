@@ -4,7 +4,6 @@ const express = require('express')
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose')
 const photoRoutes = require('./routes/photos')
-// const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/users');
 const verifyEmailRoutes = require('./routes/verifyEmail');
 
@@ -27,7 +26,6 @@ app.use((req,res,next) =>{
     next()
 })
 // Login routes go here <-----
-// app.use('/profile',authRoutes) //middleware
 app.use('/profile/photos',photoRoutes)
 app.use('/api/verify-email', verifyEmailRoutes);
 app.use('/api/users', userRoutes);
