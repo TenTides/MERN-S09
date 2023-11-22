@@ -29,7 +29,7 @@ const createPhoto = async(req,res) =>
     tags = tags.split(' ').map(tag => tag.trim());
     // add doc to db
     try {
-        const newPhoto = await photos.create({file,tags})
+        const newPhoto = await photos.create({file,tags,userID})
         newPhoto.save()
         res.status(200).json(newPhoto)
     } catch (error) {
