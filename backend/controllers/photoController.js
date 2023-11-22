@@ -11,7 +11,7 @@ const getPhotos= async(req,res) =>
 const getSinglePhoto = async(req,res) =>
 {
     const {id} = req.params
-    if(!mongoose.Types.ObjectId.isValid(id) || !mongoose.Types.ObjectId.isValid(req.session.userID)){
+    if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No Such Photo For given ID'})
     }
     const record = await photos.findById(id)

@@ -11,7 +11,7 @@ const photoSchema = new Schema({
     tags: {
         type: Array
     },
-    userID: {
+    userID: { 
         type: String,
         required: true
     }
