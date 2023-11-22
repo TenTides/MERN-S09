@@ -45,7 +45,7 @@ const createUser = async (req, res) => {
 
         // Send a verification email
         const baseUrl = process.env.BASE_URL; // Make sure this is in .env file
-        const verificationUrl = `${baseUrl}/api/verify-email?token=${verificationToken}`;
+        const verificationUrl = `${baseUrl}api/verify-email?token=${verificationToken}`;
         const emailSubject = 'Verify Your Email';
         const emailText = `Please verify your email by clicking on this link: ${verificationUrl}`;
         const emailHtml = `<strong>Please verify your email by clicking on this link:</strong> <a href="${verificationUrl}">Verify Email</a>`;

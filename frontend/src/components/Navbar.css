@@ -13,6 +13,7 @@
   color: #F7F5F5;
   margin-left: 46vw;
   position: fixed;
+  z-index: 10;
 }
 
 .name {

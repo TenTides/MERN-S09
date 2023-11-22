@@ -29,3 +29,7 @@ form h3 {
   margin-right: 15px;
   cursor: pointer;
 }
+
+form input:focus {
+  outline: none;
+}

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { usePhotosContext } from "../hooks/usePhotosContext"
 import './PhotoForm.css'
 
-const PhotoForm = ({onClose, userID}) =>
+const PhotoForm = ({onClose, userID, reload}) =>
 {   
     const {dispatch} = usePhotosContext()
 

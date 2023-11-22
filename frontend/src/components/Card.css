@@ -1,17 +1,17 @@
 .card {
   max-width: 13vw;
-  min-height: 10vw;
-  min-height: 10vh;
+  /* min-width: 10vw;
+  min-height: 10vh; */
   max-height: 30vh;
   border-radius: 7px;
   margin-right: 3vw;
   margin-bottom: 4vh;
+  /* border: 1px solid red; */
 }
 
 .card img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: cover;
   border-radius: 7px;
 }
 
@@ -24,66 +24,93 @@
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 3;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .cardWrapper.enlarged .card {
-  max-width: 40vw;
-  max-height: 40vh;
-  margin-bottom: 20%;
+  max-width: 50vw;
+  max-height: 90vh;
   margin-right: 0;
 }
 
+.cardWrapper.enlarged img {
+  width: 100%;
+  height: 100%;
+
+}
+
+
 .editCard {
-  /* background-color: white; */
+  margin-top: -3.5vh;
+  display: flex;
+  width: 50vw;
+  justify-content: space-between;
+  min-height: 50px;
+  height: 5vh;
 }
 
 .editCard .deleteBtn {
-  background-color: red;
+  background-color: #fff;
   border: none;
   padding: 6px;
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
+  height: 60%;
 }
 
 .tags {
   z-index: 999;
+  display: flex;
+  height: 60%;
 }
 
-
-
 .tag {
-  /* background-color: red; */
   padding: 4px;
   border-radius: 10px;
+  margin-right: 5px;
 }
 
 .tag button {
   background-color: transparent;
   border: none;
   font-size: 16px;
+  cursor: pointer;
 }
 
-.tags #addTagbtn {
+.tags #addTagBtn {
   background-color: #8dd9fc;
   border: none;
-  padding: 1px;
   border-radius: 10px;
   font-size: 20px;
   padding: 2px 5px;
+  cursor: pointer;
 }
 
-.tags #addTaginput {
+.tags #addTagInput {
   background-color: #8dd9fc;
   border: none;
   border-radius: 10px;
   height: 30px;
+  width: 100px;
+  margin-top: 0%;
+  padding-right: 20px;
 }
 
-.tags #addTaginput:focus {
+.tags #addTagInput:focus {
   outline: none;
   border: none;
+}
+
+.tags .tagInputContainer {
+  display: flex;
+}
+
+.tags .tagInputContainer .closeButton {
+  margin-left: -20px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }

@@ -71,6 +71,9 @@ const updatePhoto = async (req, res) => {
         // Remove the tag at the specified index
         const tagIndex = tags.index;
         photo.tags.splice(tagIndex, 1);
+      } else if (tags && tags.action === 'add' && tags.value) {
+        // Add the new tag
+        photo.tags.push(tags.value);
       }
   
       // Update other fields as needed
@@ -105,7 +108,7 @@ const searchPhotos = async (req, res) => {
     const searchRegex = new RegExp(searchValue, 'i'); // 'i' for case-insensitive search
 
     if (searchField === 'tags') {
-        searchValue = searchValue.split(' ').map((tag) => tag.trim());
+        // searchValue = searchValue.split(' ').map((tag) => tag.trim());
     }
 
     try {
@@ -128,11 +131,12 @@ const searchPhotos = async (req, res) => {
     }
 };
 
+
 module.exports = {
     createPhoto,
     getPhotos,
     getSinglePhoto,
     deletePhoto,
     updatePhoto,
-    searchPhotos
+    searchPhotos,
 }

@@ -5,7 +5,7 @@ const {
     getPhotos,
     deletePhoto,
     updatePhoto,
-    searchPhotos
+    searchPhotos,
 } = require('../controllers/photoController')
 
 

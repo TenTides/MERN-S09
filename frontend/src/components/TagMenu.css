@@ -1,0 +1,35 @@
+.tag-menu {
+  width: 10%;
+  height: 100%;
+  border-left: 2px solid #363638;
+  position: fixed;
+  right: 0;
+  z-index: 1;
+  margin-top:2vh;
+}
+
+.tag-menu .header {
+  margin-left: 20%;
+  margin-top: 5vh;
+  font-size:20px;
+  color: #fff;
+  font-family: "Poppins";
+}
+
+.tag-menu li {
+  list-style-type: none;
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 2%;
+  min-width: 50px;
+  width: 50%;
+  padding: 4px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #787878;
+  cursor: pointer;
+}
+
+.tag-menu li.selected {
+  background-color: #54d676; /* Set the selected color */
+}
