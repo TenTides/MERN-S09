@@ -2,9 +2,11 @@
 
 Open terminal
 
-_While in main folder:_
+_While in backend folder:_
 
-Start docker with ```docker compose up -d```
+Go into backend folder with ```cd backend```
+
+Start backend with ```npm run dev```
 
 Go into frontend folder with ```cd frontend```
 
