@@ -1,10 +1,10 @@
 require('dotenv').config()
 const session = require('express-session');
 const express = require('express')
+const path = require('path')
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose')
 const photoRoutes = require('./routes/photos')
-
 const userRoutes = require('./routes/users');
 const verifyEmailRoutes = require('./routes/verifyEmail');
 
@@ -22,10 +22,18 @@ app.use(session({
     })
 }));
 // Debugging Scripts Runs on every request, logging each request
-app.use((req,res,next) =>{
-    console.log(req.path,req.method)
-    next()
-})
+if(process.env.NODE_ENV == "production")
+{
+    app.use(express.static(path.join(__dirname, '/frontend/build')))
+    app.get('*',(req,res) =>{
+        res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'))
+    })
+}
+
+// app.use((req,res,next) =>{
+//     console.log(req.path,req.method)
+//     next()
+// })
 // Login routes go here <-----
 
 app.use('/profile/photos',photoRoutes)
