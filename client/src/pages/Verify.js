@@ -11,15 +11,19 @@ const Verify = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    
     const verification = async () => {
       console.log('Entering Verification');
       try {
+        
         const response = await fetch(`/api/verify-email?token=${token}`,{                
             method: 'GET',
             headers: {
+                'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
         });
+
         if (!response.ok) {
           console.log('Token:', token);
           console.error('Error fetching data:', response);
