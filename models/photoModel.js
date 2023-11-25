@@ -18,4 +18,4 @@ const photoSchema = new Schema({
 }, { timestamps: true })
 
 //model creates collection in the database if not there already
-module.exports = mongoose.model('idTest',photoSchema)
+module.exports = mongoose.model('photos',photoSchema)
