@@ -231,7 +231,7 @@ const Images = () => {
   };
 
   const handleProfileButtonClick = async () => {
-    setIsProfileDropdownOpen(true);
+    setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
   const handleLogout = async () => {
@@ -337,7 +337,6 @@ const Images = () => {
         <button onClick={handleUploadButtonClick}>
           <div className="upload">Upload</div>
         </button>
-        <div className="help">Help</div>
         <div className="profile"  onClick={handleProfileButtonClick}>
           <div className="profile-button">
             J
@@ -357,7 +356,7 @@ const Images = () => {
             <div className={`photos-container ${fadeIn ? 'fade-in active' : ''}`}>
               {photos && photos.length > 0 ? (
                 <CardGroup
-                  heading="Today,"
+                  heading="Welcome,"
                   cardsData={photos}
                   onDeleteClick={handleDelete}
                   selectedCard={selectedCard}

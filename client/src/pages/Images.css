@@ -16,6 +16,7 @@
   padding: 10px;
   border-bottom: 2px solid #363638;
   position: fixed;
+  z-index: 10;
 }
 
 .s_nav .logo {
@@ -127,8 +128,8 @@ nav button:hover {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
-  z-index: 1; /* Ensure the overlay is above other elements */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1; 
 }
 
 .profile:hover {

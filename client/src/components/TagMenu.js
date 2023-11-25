@@ -18,7 +18,9 @@ const TagMenu = ({ tags, onSelectTag }) => {
     <div className="tag-menu">
       <div className='header'>Your Tags</div>
       <ul>
-        {tags.map((tag) => (
+        {tags
+          .filter(tag => tag !== '')
+          .map((tag) => (
           <li
             key={tag}
             className={selectedTags.includes(tag) ? 'selected' : ''}

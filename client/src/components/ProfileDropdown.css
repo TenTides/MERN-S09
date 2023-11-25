@@ -10,7 +10,8 @@
   justify-content: center;
   flex-direction: column;
   border-radius: 8px;
-  background-color: rgba(220, 220, 220, 0.025);
+  background-color: #1D1F23;
+  z-index: 999;
 }
 
 .profile-dropdown #email {

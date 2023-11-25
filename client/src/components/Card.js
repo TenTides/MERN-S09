@@ -8,6 +8,36 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
   const [localTags, setLocalTags] = useState(tags);
   const [tagColors, setTagColors] = useState({});
 
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const adjustImageSize = () => {
+      const imgElement = imgRef.current;
+
+      if (imgElement) {
+        const aspectRatio = imgElement.width / imgElement.height;
+
+        if (aspectRatio > 1) {
+          // Landscape image
+          imgElement.style.maxWidth = '600px';
+          imgElement.style.maxHeight = 'auto';
+        } else {
+          // Portrait image
+          imgElement.style.maxWidth = 'auto';
+          imgElement.style.maxHeight = '350px';
+        }
+      }
+    };
+
+    // Attach the adjustImageSize function to the onLoad event of the image
+    imgRef.current.addEventListener('load', adjustImageSize);
+
+    return () => {
+      // Remove the event listener when the component is unmounted
+      imgRef.current.removeEventListener('load', adjustImageSize);
+    };
+  }, []);
+
   const handleWrapperClick = (event) => {
     if (isEnlarged) {
       setIsEnlarged(false);
@@ -89,7 +119,7 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
   return (
     <div className={`cardWrapper ${isEnlarged ? 'enlarged' : ''}`} onClick={handleWrapperClick}>
       <div className={`card ${isEnlarged ? 'enlarged' : ''}`} onClick={handleImageClick}>
-        <img src={imageSrc} alt={title} />
+        <img ref={imgRef} src={imageSrc} alt={title} />
       </div>
       {isEnlarged && (
         <div className='editCard' onClick={handleEditClick}>

@@ -14,7 +14,7 @@ const CardGroup = ({ heading, cardsData, onDeleteClick, selectedCard, onClickOut
             photoId={card._id}
             imageSrc={card.file}
             title={card.title}
-            tags = {card.tags}
+            tags = {card.tags[0] !== '' ? card.tags : []}
             onDeleteClick={onDeleteClick}
             isSelected={selectedCard === index}
             onClickOutside={onClickOutside}
