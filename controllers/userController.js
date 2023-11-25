@@ -14,7 +14,13 @@ const getUsers = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-    // Logic to get a single user by ID
+    const { id } = req.params;
+    try {
+        const user = await User.findOne(id); // Fetch all users
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching users', error: error.message });
+    }
 };
 
 const createUser = async (req, res) => {
