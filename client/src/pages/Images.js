@@ -159,6 +159,7 @@ const Images = () => {
       if (response.ok) {
         const json = await response.json();
         dispatch({ type: 'SET_PHOTOS', payload: json });
+        
       } else {
         console.error('Error searching photos:', response);
       }
@@ -259,7 +260,6 @@ const Images = () => {
     setUserId(null);
     navigate('/register');
   };
-
   const organizePhotosByDate = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -289,7 +289,9 @@ const Images = () => {
     return { todayPhotos, thisWeekPhotos, thisMonthPhotos, pastMonthPhotos };
   };
 
-  const { todayPhotos, thisWeekPhotos, thisMonthPhotos, pastMonthPhotos } = organizePhotosByDate();
+  // const { todayPhotos, thisWeekPhotos, thisMonthPhotos, pastMonthPhotos } = organizePhotosByDate();
+
+  
 
   const handleTagSelection = async (selectedTags) => {
     try {
@@ -349,7 +351,28 @@ const Images = () => {
         )}
         {showForm && <PhotoForm onClose={handleFormClose} userID={userId} reload={fetchPhotos()} />}
         <div className="cards">
-          {loading ? (
+        {loading ? (
+            <div className="loading">LOADING</div>
+          ) : (
+            <div className={`photos-container ${fadeIn ? 'fade-in active' : ''}`}>
+              {photos && photos.length > 0 ? (
+                <CardGroup
+                  heading="Today,"
+                  cardsData={photos}
+                  onDeleteClick={handleDelete}
+                  selectedCard={selectedCard}
+                  onClickOutside={handleCloseEnlargedCard}
+                  onDeleteTag={deleteTag}
+                  onAddTag={addTag}
+                />
+              ) : (
+                <p>No images found</p>
+              )}
+            </div>
+          )}
+
+
+          {/* {loading ? (
             <div className="loading">LOADING</div>
           ) : (
             <div className={`photos-container ${fadeIn ? 'fade-in active' : ''}`}>
@@ -404,7 +427,7 @@ const Images = () => {
                 <p>No images found</p>
               )}
             </div>
-          )}
+          )} */}
         </div>
         <TagMenu tags={allTags} onSelectTag={handleTagSelection} />
       </div>
