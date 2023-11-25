@@ -24,20 +24,6 @@ app.use(session({
     })
 }));
 // Debugging Scripts Runs on every request, logging each request
-if(process.env.NODE_ENV == "production")
-{
-    app.use(express.static(path.join(__dirname, '/client/build')))
-    app.get('*',(req,res) =>{
-        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
-    })
-}
-
-// app.use((req,res,next) =>{
-//     console.log(req.path,req.method)
-//     next()
-// })
-// Login routes go here <-----
-
 app.use('/profile/photos',photoRoutes)
 app.use('/api/verify-email', verifyEmailRoutes);
 app.use('/api/users', userRoutes);
@@ -58,7 +44,16 @@ app.post('/api/logout', (req, res) => {
         res.json({ message: 'Logout successful' });
       }
     });
-  });
+});
+if(process.env.NODE_ENV == "production")
+{
+    app.use(express.static(path.join(__dirname, '/client/build')))
+    app.get('*',(req,res) =>{
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+    })
+}
+
+
 
 // Connect to db
 mongoose.connect(process.env.MONGO_URI)
