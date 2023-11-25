@@ -1,4 +1,0 @@
-[ZoneTransfer]
-ZoneId=3
-ReferrerUrl=https://cloudconvert.com/
-HostUrl=https://eu-central.storage.cloudconvert.com/tasks/65d9abe4-e7a9-4d98-804b-c18d09b07dea/camera.ico?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20231125%2Ffra%2Fs3%2Faws4_request&X-Amz-Date=20231125T192841Z&X-Amz-Expires=86400&X-Amz-Signature=3f8208cc4cc1dbdecd27d335d0b6e0976f8e690b6b16ca34d14d96d84bc39faf&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22camera.ico%22&response-content-type=image%2Fvnd.microsoft.icon&x-id=GetObject
