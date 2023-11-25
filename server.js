@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const photoRoutes = require('./routes/photos')
 const userRoutes = require('./routes/users');
 const verifyEmailRoutes = require('./routes/verifyEmail');
+const cors = require('cors');
 
 // Express App is started
 const app = express() 
