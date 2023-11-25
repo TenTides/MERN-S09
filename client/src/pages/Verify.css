@@ -1,0 +1,19 @@
+.Verify{
+  text-align: center;
+  background-color: #1D1F23;
+  width: 97vw;
+  height: 300vh;
+  position: relative;
+  overflow-x: hidden;  
+}
+.center-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+.centered-h1 {
+    color: white;
+    text-align: center;
+}
