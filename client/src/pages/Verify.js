@@ -14,7 +14,12 @@ const Verify = () => {
     const verification = async () => {
       console.log('Entering Verification');
       try {
-        const response = await fetch(`/api/verify-email?token=${token}`);
+        const response = await fetch(`/api/verify-email?token=${token}`,{                
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
         if (!response.ok) {
           console.log('Token:', token);
           console.error('Error fetching data:', response);
