@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Images from './pages/Images';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Verify from './pages/Verify';
+
 
 function App() {
   return (
