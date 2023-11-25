@@ -22,6 +22,7 @@ const Verify = () => {
         });
         if (!response.ok) {
           console.log('Token:', token);
+          console.log(response)
           console.error('Error fetching data:', response);
           return;
         }
