@@ -4,6 +4,9 @@ const verifyEmail = async (req, res) => {
   const token = req.query.token;
   try {
     const user = await User.findOne({ verificationToken: token });
+    console.log("Entered Verification Area")
+    console.log(user.emailVerified)
+
     if (!user) {
       return res.status(404).json({ message: 'Invalid or expired token' });
     }
