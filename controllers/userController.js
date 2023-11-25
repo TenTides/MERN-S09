@@ -1,8 +1,11 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const { v4: uuidv4 } = require('uuid');
 const sendVerificationEmail = require('../utils/sendVerificationEmail');
+const ObjectId = mongoose.Types.ObjectId;
+
 
 const getUsers = async (req, res) => {
     try {
@@ -16,7 +19,7 @@ const getUsers = async (req, res) => {
 const getUser = async (req, res) => {
     const { id } = req.params;
     try {
-        const user = await User.findOne(id); // Fetch all users
+        const user = await User.findOne({_id : ObjectId(id)}); // Fetch all users
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching users', error: error.message });
