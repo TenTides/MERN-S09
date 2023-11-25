@@ -12,9 +12,11 @@ const Verify = () => {
 
   useEffect(() => {
     const verification = async () => {
+      console.log('Entering Verification');
       try {
         const response = await fetch(`/api/verify-email?token=${token}`);
         if (!response.ok) {
+          console.log('Token:', token);
           console.error('Error fetching data:', response);
           return;
         }
@@ -22,6 +24,7 @@ const Verify = () => {
         const json = await response.json();
         setMessage(json.message);
       } catch (error) {
+        console.log('Token:', token);
         console.error('Error fetching data:', error.message);
       }
     };
