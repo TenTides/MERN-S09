@@ -15,8 +15,7 @@ function App() {
 				<Route path="/login" element={<Login/>}></Route>
 				<Route path="/images" element={<Images />} />
 				<Route path="/" element={<Home/>}></Route>
-				<Route path="/verify/:token" element={<Verify/>}>
-			</Route>
+				<Route path="/verify" element={<Verify/>}></Route>
 			</Routes>
       </BrowserRouter>
   );
