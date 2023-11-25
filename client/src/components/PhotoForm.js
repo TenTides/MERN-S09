@@ -33,6 +33,10 @@ const PhotoForm = ({onClose, userID, reload}) =>
         e.preventDefault()
         
         const photo = {file, tags, userID}
+
+        if (tags.trim() !== '') {
+          photo.tags = tags;
+      }
         const response = await fetch('/profile/photos',{
             method: 'POST',
             body: JSON.stringify(photo),
@@ -84,7 +88,16 @@ const PhotoForm = ({onClose, userID, reload}) =>
             <label htmlFor="file-upload" className="custom-file-upload">Source:</label>
             <input type="file" name = "myFile" id = "file-upload" accept=".jpeg, .png, .jpg" onChange={handleFileChange}/>
             <label>Tags:</label>
-            <input type="text" onChange={(e) => setTags(e.target.value)} value={tags}/>
+            <input 
+              type="text" 
+              onChange={(e) => {
+                const inputValue = e.target.value;
+                // Conditionally set tags only if the input is not empty
+                if (inputValue.trim() !== '') {
+                    setTags(inputValue);
+                }
+              }}
+              value={tags}/>
             <button type="submit">Add Photo</button>
             {error && <div className ="error">{error}</div>}
         </form>
