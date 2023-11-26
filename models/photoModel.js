@@ -14,7 +14,7 @@ const photoSchema = new Schema({
     userID: { 
         type: String,
         required: true
-    }
+    } 
 }, { timestamps: true })
 
 //model creates collection in the database if not there already
