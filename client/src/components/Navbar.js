@@ -9,7 +9,7 @@ function Navbar() {
         <span className="name">#Photo4u</span>
         <div className='links'>
           <Link to="/about" className="more">More</Link>
-          <Link to="/images" className="join">Join</Link>
+          <Link to="/login" className="join">Join</Link>
         </div>
     </nav>
   );

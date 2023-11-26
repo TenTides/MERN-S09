@@ -310,7 +310,7 @@ const Images = () => {
 
   const clearSession = () => {
     setUserId(null);
-    navigate('/register');
+    navigate('/login');
   };
   
   
