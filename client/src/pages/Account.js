@@ -6,12 +6,13 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import logImage from './img/log.svg';  // Import the image
 import regImage from './img/reg.svg';  // Import the image
 
-
 const Account = () => {
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const [registerEmail, setRegisterEmail] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
+    const [loginError, setLoginError] = useState('');
+    const [registerError, setRegisterError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -50,10 +51,11 @@ const Account = () => {
             navigate('/images');
           } else {
             const data = await response.json();
-            console.error(data.message);
+            setLoginError(data.message); // Set error message          
           }
         } catch (error) {
-          console.error('Error during login:', error);
+            console.error('Error during login:', error);
+            setLoginError('Error during login. Please try again.'); // Set generic error message
         }
       };
 
@@ -76,11 +78,11 @@ const Account = () => {
             console.log("Registration successful");
           } else {
             const data = await response.json();
-            console.error(data.message);
-            
+            setRegisterError(data.message); // Set error message            
           }
         } catch (error) {
-          console.error('Error during registration:', error);
+            console.error('Error during registration:', error);
+            setRegisterError('Error during registration. Please try again.'); // Set generic error message
         }
       };
 
@@ -114,15 +116,16 @@ const Account = () => {
                         {/* Login Form */}
                         <form action="" className="signin-form">
                             <h2 className="title">Sign in</h2>
+                            {loginError && <p className="error-message">{loginError}</p>}
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faEnvelope} className='i' />
                                 {/*<img src="/envelope-solid.svg" class="image" alt="" />*/}
-                                <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
+                                <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value) required maxlength="50"} />
                             </div>
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faLock} className='i' />
                                 {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
-                                <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                                <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value) required maxlength="50"} />
                             </div>
                             <input type="submit" value="Login" className="btn solid" onClick={handleLoginSubmit} />
                         </form>
@@ -130,15 +133,16 @@ const Account = () => {
                         {/* Register Form */}
                         <form action="" className="signup-form">
                             <h2 className="title">Sign up</h2>
+                            {registerError && <p className="error-message">{registerError}</p>}
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faEnvelope} className='i' />
                                 {/*<img src="/envelope-solid.svg" class="image" alt="" />*/}
-                                <input type="email" placeholder="Email" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value)} />
+                                <input type="email" placeholder="Email" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value) required maxlength="50"} />
                             </div>
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faLock} className='i' />
                                 {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
-                                <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} />
+                                <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value) required maxlength="50"} />
                             </div>
                             <input type="submit" value="Sign up" className="btn solid" onClick={handleRegisterSubmit} />
                         </form>
