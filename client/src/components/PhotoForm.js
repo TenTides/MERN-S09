@@ -38,7 +38,7 @@ const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
           }
         }
     };
-
+ 
     const handleNewbie = async (e) =>{
         e.preventDefault()
         
