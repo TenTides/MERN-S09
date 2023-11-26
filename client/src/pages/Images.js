@@ -264,6 +264,8 @@ const Images = () => {
 
       if (response.ok) {
         const updatedPhotos = photos.map((photo) => {
+        
+
           if (photo._id === photoId) {
             const updatedTags = [...photo.tags, newTag];
             return { ...photo, tags: updatedTags };
@@ -273,10 +275,10 @@ const Images = () => {
         dispatch({ type: 'SET_PHOTOS', payload: updatedPhotos });
       } else {
         const data = await response.json();
-        console.error('Error updating photo tags:', data.error);
+        console.error('Error updating photo tags1:', data.error);
       }
     } catch (error) {
-      console.error('Error updating photo tags:', error.message);
+      console.error('Error updating photo tags2:', error.message);
     }
   };
 
@@ -366,7 +368,7 @@ const Images = () => {
         </button>
         <div className="profile"  onClick={handleProfileButtonClick}>
           <div className="profile-button">
-            J
+            {userEmail.charAt(0).toUpperCase()}
           </div>
           {isProfileDropdownOpen && <ProfileDropdown userEmail={userEmail} onLogout={handleLogout} />}
         </div>

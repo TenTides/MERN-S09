@@ -139,27 +139,25 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
   const addTag = () => {
     const inputElement = document.getElementById('addTagInput');
     const newTag = inputElement.value.trim();
-
+  
     if (newTag !== '') {
-      const updatedTags = [...localTags, newTag];
-      setLocalTags(updatedTags);
-
+      setLocalTags((prevTags) => {
+        const updatedTags = [...prevTags, newTag];
+        console.log("updating local");
+        return updatedTags;
+      });
+  
       const newColor = getColor();
-
-      setTagColors(prevColors => ({
+  
+      setTagColors((prevColors) => ({
         ...prevColors,
         [newTag]: newColor,
       }));
-
-
+  
       onAddTag(photoId, newTag);
       setTagInput(false);
     }
   };
-
-  useEffect(() => {
-    setLocalTags(tags);
-  }, [tags]);
 
   const getColorForTag = (tag) => {
     if (tagColors[tag]) {
@@ -183,7 +181,7 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
       {isEnlarged && (
         <div className='editCard' onClick={handleEditClick}>
           <div className="tags">
-            {localTags.length > 0 && localTags.map((tag, index) => (
+            {localTags.length > 0 && localTags.filter(tag => tag.trim() !== '').map((tag, index) => (
               <span 
                 key={index} 
                 className='tag' 
@@ -200,6 +198,7 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
                   type="text" 
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
+                      e.preventDefault();
                       addTag();
                     }
                   }}

@@ -12,10 +12,15 @@
   border-radius: 8px;
   background-color: #1D1F23;
   z-index: 999;
+  overflow: hidden;
 }
 
 .profile-dropdown #email {
   margin-bottom: 10%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
 }
 
 .profile-dropdown button {
