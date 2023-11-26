@@ -83,33 +83,6 @@ const Images = () => {
     fetchUser();
   }, [userId]);
 
-
-
-  useEffect(() => {
-    const fetchPhotos = async () => {
-
-      const response = await fetch('/profile/photos/');
-      
-      console.log(response);
-      if (!response.ok) {
-        console.error('Error fetching photos:', response);
-        return;
-      }
-  
-      const json = await response.json();
-      if (response.ok) {
-        setAllPhotos(json);
-        console.log("all photos", json)
-        dispatch({ type: 'SET_PHOTOS', payload: json });
-        console.log(json);
-        setLoading(false);
-        setFadeIn(true);
-        setAllTags(extractUniqueTags(json));
-      }
-    };
-    fetchPhotos();    
-  }, [dispatch]);
-
   const fetchPhotos = async () => {
     try {
       const response = await fetch('/profile/photos/');
@@ -127,6 +100,31 @@ const Images = () => {
       console.error('Error fetching photos:', error.message);
     }
   };
+
+  useEffect(() => {
+    // const fetchPhotos = async () => {
+
+    //   const response = await fetch('/profile/photos/');
+      
+    //   console.log(response);
+    //   if (!response.ok) {
+    //     console.error('Error fetching photos:', response);
+    //     return;
+    //   }
+  
+    //   const json = await response.json();
+    //   if (response.ok) {
+    //     setAllPhotos(json);
+    //     console.log("all photos", json)
+    //     dispatch({ type: 'SET_PHOTOS', payload: json });
+    //     console.log(json);
+    //     setLoading(false);
+    //     setFadeIn(true);
+    //     setAllTags(extractUniqueTags(json));
+    //   }
+    // };
+    fetchPhotos();    
+  }, [dispatch]);
 
   const extractUniqueTags = (photos) => {
     const allTags = photos.reduce((tags, photo) => {
