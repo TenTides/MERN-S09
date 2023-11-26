@@ -21,3 +21,13 @@
 .profile-dropdown button {
   margin: 0 auto;
 }
+
+
+@media only screen and (max-width: 600px){
+  .profile-dropdown {
+    width: 80vw;
+    top: 105%;
+    right: 6%;
+  }
+  
+}

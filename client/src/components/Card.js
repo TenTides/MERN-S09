@@ -12,41 +12,100 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
 
   useEffect(() => {
     const adjustImageSize = () => {
+      console.log('adjustnig size');
       const imgElement = imgRef.current;
-
+      const cardElement = imgElement.parentElement;
+  
       if (imgElement) {
         const aspectRatio = imgElement.width / imgElement.height;
-
+  
         if (aspectRatio > 1) {
           // Landscape image
-          imgElement.style.maxWidth = '600px';
+          cardElement.style.maxWidth = '40vw';
+          imgElement.style.maxWidth = '40vw';
+          cardElement.style.maxHeight = 'auto';
           imgElement.style.maxHeight = 'auto';
         } else {
           // Portrait image
+          cardElement.style.maxWidth = 'auto';
           imgElement.style.maxWidth = 'auto';
-          imgElement.style.maxHeight = '350px';
+          cardElement.style.maxHeight = '30vh';
+          imgElement.style.maxHeight = '30vh';
         }
       }
     };
-
-    // Attach the adjustImageSize function to the onLoad event of the image
-    imgRef.current.addEventListener('load', adjustImageSize);
-
+  
+    const imgElement = imgRef.current;
+  
+    if (imgElement && imgElement.complete) {
+      adjustImageSize();
+    } else {
+      imgRef.current.addEventListener('load', adjustImageSize);
+    }
+  
     return () => {
-      // Remove the event listener when the component is unmounted
-      imgRef.current.removeEventListener('load', adjustImageSize);
+      if (imgElement) {
+        imgElement.removeEventListener('load', adjustImageSize);
+      }
     };
   }, []);
 
   const handleWrapperClick = (event) => {
     if (isEnlarged) {
       setIsEnlarged(false);
+  
+      const cardElement = imgRef.current.parentElement;
+      const imgElement = imgRef.current;
+  
+      if (cardElement && imgElement) {
+        const aspectRatio = imgElement.width / imgElement.height;
+  
+        if (aspectRatio > 1) {
+          // Landscape image
+          cardElement.style.maxWidth = '40vw'; // Set the original max width
+          cardElement.style.maxHeight = 'auto';
+          imgElement.style.maxWidth = '40vw';
+          imgElement.style.maxHeight = 'auto';
+        } else {
+          // Portrait image
+          cardElement.style.maxWidth = 'auto';
+          cardElement.style.maxHeight = '30vh'; // Set the original max height
+          imgElement.style.maxWidth = 'auto';
+          imgElement.style.maxHeight = '30vh';
+        }
+      }
     }
   };
 
   const handleImageClick = (event) => {
     event.stopPropagation();
     setIsEnlarged(true);
+  
+    const cardElement = imgRef.current.parentElement;
+    const imgElement = imgRef.current;
+  
+    if (cardElement && imgElement) {
+      const aspectRatio = imgElement.width / imgElement.height;
+  
+      if (aspectRatio > 1) {
+        // Landscape image
+        const currentMaxWidth = parseFloat(window.getComputedStyle(cardElement).maxWidth);
+        const newMaxWidth = currentMaxWidth * 12;
+        cardElement.style.maxWidth = `${newMaxWidth}px`;
+        console.log('new max width', newMaxWidth);
+        cardElement.style.maxHeight = 'auto';
+        imgElement.style.maxWidth = `${newMaxWidth}px`; // Set the image width to 100%
+        imgElement.style.maxHeight = 'auto';
+      } else {
+        // Portrait image
+        const currentMaxHeight = parseFloat(window.getComputedStyle(cardElement).maxHeight);
+        const newMaxHeight = currentMaxHeight * 2;
+        cardElement.style.maxWidth = 'auto';
+        cardElement.style.maxHeight = `${newMaxHeight}px`;
+        imgElement.style.maxWidth = 'auto';
+        imgElement.style.maxHeight = `${newMaxHeight}px`; // Set the image height to 100%
+      }
+    }
   };
 
   const handleDeleteClick = (event) => {

@@ -108,9 +108,28 @@ nav button:hover {
 }
 
 *::-moz-scrollbar-thumb {
-  background-color: #333;
+  background-color: #000000;
 }
 
+*::-webkit-scrollbar-track {
+  background-color: #1D1F23;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #000000;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  /* background: transparent; */
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(151, 151, 151);
+  border-radius: 20px;
+  border: transparent;
+}
 
 /* fade in images once page is loaded */
 .fade-in {
@@ -138,4 +157,80 @@ nav button:hover {
 
 .profile:active {
   outline: 1.5px solid rgba(255, 255, 255, 1);
+}
+
+.loading-bar-container {
+  margin-left: 20vw;
+  margin-top: 20vh;
+  width: 100%;
+  height: 5px;
+  background-color: #f0f0f0;
+}
+
+.loading-bar {
+  width: 50%;
+  height: 100%;
+  background-color: #a8a8a8;
+  animation: loadingAnimation 1.5s linear infinite alternate; /* Back-and-forth animation */
+}
+
+.cards .loading {
+  width: 40vw;
+
+}
+
+@keyframes loadingAnimation {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+
+
+@media only screen and (max-width: 600px){
+  .s_nav .logo {
+    font-size: 28px;
+    margin-left: 5vw;
+  }
+  .s_nav .logo img {
+    scale: 1.5;
+  }
+
+  .photos-container {
+    margin-left: -10%;
+    margin-right: -10%;
+  }
+
+
+
+  .s_nav .profile {
+    width: 8px;
+    height: 8px;
+    margin-right: 8vw;
+    margin-top: -1vh;
+  }
+
+  .s_nav .search {
+    margin-right: -5vw;
+  }
+
+  .s_nav .search input{
+    width: 85%;
+  }
+
+  #uploadbtn {
+    border-radius: 50%;
+    height: 45px;
+    width: 45px;
+    margin-top: 175vh;
+    margin-right: -8vw;
+  }
+
+  .upload {
+    font-size: 40px;
+    margin-top: -15px;
+  }
 }

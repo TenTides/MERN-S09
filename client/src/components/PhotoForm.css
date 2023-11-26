@@ -33,3 +33,9 @@ form h3 {
 form input:focus {
   outline: none;
 }
+
+@media only screen and (max-width: 600px){
+  form {
+    width: 80vw;
+  }
+}

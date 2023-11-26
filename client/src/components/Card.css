@@ -1,17 +1,17 @@
 .card {
-  /* max-width: 300px; */
-  /* max-height: 300px; */
+  /* max-width: 300px;
+  max-height: 300px; */
   border-radius: 7px;
   margin-right: 3vw;
   margin-bottom: 4vh;
   /* border: 5px solid red; */
 }
 
+
 .card img {
   max-width: 100%;
   max-height: 100%;
   border-radius: 7px;
-  
 }
 
 .cardWrapper.enlarged {
@@ -20,8 +20,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  /* z-index: 3; */
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 30;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,14 +29,15 @@
 }
 
 .cardWrapper.enlarged .card {
-  max-width: 50vw;
-  max-height: 90vh;
   margin-right: 0;
+  /* border: 1px solid red; */
 }
 
 .cardWrapper.enlarged img {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
+  min-width: auto;
+  min-height: 100%;
 
 }
 
@@ -44,8 +45,8 @@
 .editCard {
   margin-top: -3.5vh;
   display: flex;
-  width: 50vw;
-  justify-content: space-between;
+  width: 100%;
+  justify-content: center;
   min-height: 50px;
   height: 5vh;
 }
@@ -55,7 +56,6 @@
   border: none;
   padding: 6px;
   border-radius: 10px;
-  font-weight: bold;
   cursor: pointer;
   height: 60%;
 }
@@ -64,12 +64,14 @@
   z-index: 999;
   display: flex;
   height: 60%;
+  overflow: hidden;
 }
 
 .tag {
   padding: 4px;
   border-radius: 10px;
   margin-right: 5px;
+  overflow: hidden;
 }
 
 .tag button {
@@ -112,4 +114,23 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+/* mobile layout */
+
+@media only screen and (max-width: 600px){
+  .card {
+    max-width: 40%;
+    max-height: 10%;
+  }
+
+  .card img {
+    max-width: 100%;
+    max-height: 10%;
+    border-radius: 7px;
+  }
+
+  .tags {
+    display: none;
+  }
 }

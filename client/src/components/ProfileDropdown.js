@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProfileDropdown.css';
 
-const ProfileDropdown = ({ onLogout }) => {
+const ProfileDropdown = ({userEmail, onLogout }) => {
+  
   return (
     <div className="profile-dropdown">
-      <div id='email'>emailman@gmail.com</div>
+      <div id='email'>{userEmail}</div>
       <button onClick={onLogout}>Logout</button>
     </div>
   );

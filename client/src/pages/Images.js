@@ -6,9 +6,19 @@ import PhotoForm from "../components/PhotoForm";
 import ProfileDropdown from '../components/ProfileDropdown';
 import { useNavigate } from 'react-router-dom';
 import TagMenu from '../components/TagMenu';
+import p4ulogo from '../icons/p4ulogo.png';
+
+const LoadingBar = () => {
+  return (
+    <div className="loading-bar-container">
+      <div className="loading-bar"></div>
+    </div>
+  );
+};
 
 const Images = () => {
   const [userId, setUserId] = useState(null);
+  const [userEmail, setUserEmail] = useState('');
   const { photos, dispatch } = usePhotosContext();
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -19,7 +29,24 @@ const Images = () => {
   const [allPhotos, setAllPhotos] = useState([]);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const navigate = useNavigate();  
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 600); // Adjust the width as needed
+    };
+
+    // Set the initial state
+    handleResize();
+
+    // Add a resize event listener to track changes
+    window.addEventListener('resize', handleResize);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   
   useEffect(() => {
     fetch('/api/session')
@@ -33,7 +60,30 @@ const Images = () => {
         }
       })
       .catch((error) => console.error('Error fetching session data:', error));
-  }, []);
+  }, [])
+
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(`/api/users/${userId}`);
+        if (!response.ok) {
+          console.error('Error fetching user details:', response);
+          return;
+        }
+  
+        const json = await response.json();
+        if (response.ok) {
+          setUserEmail(json.email);
+          console.log("user email", json.email);
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+  
+    fetchUser();
+  }, [userId]);
 
 
 
@@ -260,37 +310,7 @@ const Images = () => {
     setUserId(null);
     navigate('/register');
   };
-  const organizePhotosByDate = () => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const thisWeek = new Date();
-    thisWeek.setDate(thisWeek.getDate() - 7);
-    const thisMonth = new Date();
-    thisMonth.setMonth(thisMonth.getMonth() - 1);
-
-    const todayPhotos = [];
-    const thisWeekPhotos = [];
-    const thisMonthPhotos = [];
-    const pastMonthPhotos = [];
-
-    allPhotos.forEach((photo) => {
-      const photoDate = new Date(photo.createdAt);
-      if (photoDate >= today) {
-        todayPhotos.push(photo);
-      } else if (photoDate >= thisWeek) {
-        thisWeekPhotos.push(photo);
-      } else if (photoDate >= thisMonth) {
-        thisMonthPhotos.push(photo);
-      } else {
-        pastMonthPhotos.push(photo);
-      }
-    });
-
-    return { todayPhotos, thisWeekPhotos, thisMonthPhotos, pastMonthPhotos };
-  };
-
-  // const { todayPhotos, thisWeekPhotos, thisMonthPhotos, pastMonthPhotos } = organizePhotosByDate();
-
+  
   
 
   const handleTagSelection = async (selectedTags) => {
@@ -321,7 +341,13 @@ const Images = () => {
   return (
     <div className='body'>
       <nav className='s_nav'>
-        <div className="logo">#Photo4u</div>
+      {isMobile ? (
+          <div className="logo">
+            <img src={p4ulogo} alt="#p4u" style={{ height: '30px', width: 'auto' }} />
+            </div>
+        ) : (
+          <div className="logo">#Photo4u</div>
+        )}
         <div className='search'>
         <input
           type="text"
@@ -334,14 +360,15 @@ const Images = () => {
           }}
         />
         </div>
-        <button onClick={handleUploadButtonClick}>
-          <div className="upload">Upload</div>
+        <button id="uploadbtn" onClick={handleUploadButtonClick}>
+          {/* Display different content for the upload button based on the screen size */}
+          {isMobile ? <div className="upload">+</div> : <div className="upload">Upload</div>}
         </button>
         <div className="profile"  onClick={handleProfileButtonClick}>
           <div className="profile-button">
             J
           </div>
-          {isProfileDropdownOpen && <ProfileDropdown onLogout={handleLogout} />}
+          {isProfileDropdownOpen && <ProfileDropdown userEmail={userEmail} onLogout={handleLogout} />}
         </div>
       </nav>
       <div className='Main'>
@@ -351,7 +378,9 @@ const Images = () => {
         {showForm && <PhotoForm onClose={handleFormClose} userID={userId} reload={fetchPhotos()} />}
         <div className="cards">
         {loading ? (
-            <div className="loading">LOADING</div>
+            <div className="loading">
+              <LoadingBar />
+            </div>
           ) : (
             <div className={`photos-container ${fadeIn ? 'fade-in active' : ''}`}>
               {photos && photos.length > 0 ? (
@@ -428,7 +457,7 @@ const Images = () => {
             </div>
           )} */}
         </div>
-        <TagMenu tags={allTags} onSelectTag={handleTagSelection} />
+        {isMobile ? null : <TagMenu tags={allTags} onSelectTag={handleTagSelection} />}
       </div>
     </div>
   );
