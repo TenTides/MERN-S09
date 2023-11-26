@@ -398,6 +398,7 @@ const Images = () => {
                   onClickOutside={handleCloseEnlargedCard}
                   onDeleteTag={deleteTag}
                   onAddTag={addTag}
+                  isMobile={isMobile}
                 />
               ) : (
                 <p>No images found</p>

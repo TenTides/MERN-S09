@@ -2,13 +2,23 @@ import { useState } from "react"
 import { usePhotosContext } from "../hooks/usePhotosContext"
 import './PhotoForm.css'
 
+const LoadingBar = () => {
+  return (
+    <div className="loading-bar-container">
+      <div className="loading-bar"></div>
+    </div>
+  );
+};
+
+
 const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
 {   
     const {dispatch} = usePhotosContext()
 
-    const [file, setFile] = useState('')
-    const [tags, setTags] = useState('')
-    const [error, setError] = useState('')
+    const [file, setFile] = useState('');
+    const [tags, setTags] = useState('');
+    const [error, setError] = useState('');
+    const [load, setLoad] = useState(false);
 
     const handleFileChange = async (e) => 
     {
@@ -33,7 +43,7 @@ const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
         e.preventDefault()
         
         const photo = {file, tags, userID}
-
+        setLoad(true);
         if (tags.trim() !== '') {
           photo.tags = tags;
       }
@@ -46,6 +56,7 @@ const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
             }
         })
         const json = await response.json()
+        setLoad(false);
         if(!response.ok)
         {
             setError(json.error)
@@ -55,6 +66,8 @@ const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
             setFile('')
             setTags('')
             setError(null)
+            setLoad(true);
+            console.log(load);
             console.log('New Photo Added', json)
             dispatch({type:"CREATE_PHOTO",payload: json})
 
@@ -70,8 +83,7 @@ const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
                 }
               } catch (error) {
                 console.error('Error fetching photos after upload:', error.message);
-              }
-
+              }            
             onClose();
         }
     }
@@ -100,6 +112,7 @@ const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
               }}
               value={tags}/>
             <button type="submit">Add Photo</button>
+            {load&& <div className="load"><LoadingBar /></div>}
             {error && <div className ="error">{error}</div>}
         </form>
     )

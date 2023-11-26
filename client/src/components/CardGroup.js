@@ -2,7 +2,7 @@ import React from 'react';
 import './Card.css';
 import Card from './Card';
 import './CardGroup.css'
-const CardGroup = ({ heading, cardsData, onDeleteClick, selectedCard, onClickOutside, onDeleteTag, onAddTag }) => {
+const CardGroup = ({ heading, cardsData, onDeleteClick, selectedCard, onClickOutside, onDeleteTag, onAddTag, isMobile }) => {
   return (
     <div className="card-group">
       <div className='heading'>{heading}</div>
@@ -20,6 +20,7 @@ const CardGroup = ({ heading, cardsData, onDeleteClick, selectedCard, onClickOut
             onClickOutside={onClickOutside}
             onDeleteTag = {onDeleteTag}
             onAddTag = {onAddTag}
+            isMobile={isMobile}
           />
         ))}
       </div>

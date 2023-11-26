@@ -2,13 +2,14 @@
   overflow-x: hidden;
   overflow-y: auto;
   font-family: 'IBM Plex Mono', monospace;
+  height: 100vh;
 }
 
 
 .s_nav {
   background-color: #1D1F23;
   color: #fff;
-  height: max(8vh, 40px);
+  height: max(10vh, 40px);
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -36,7 +37,7 @@
 
 
 .s_nav input{
-  width: 25vw;
+  width: 30vw;
   height: max(5vh, 40px);
   outline: 1px solid #fff;
   border-radius: 5px;
@@ -59,8 +60,8 @@
 .s_nav .profile {
   display: flex;
   font-size: 24px;
-  width: 15px;
-  height: 15px;
+  width: 50px;
+  height: 50px;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -78,12 +79,16 @@
   width: 100vw;
   display: flex;
   justify-content: space-between;
+
 }
 
 .cards {
   display: flex;
   flex-direction: column;
   padding: 55px;
+  width: 95%;
+  max-height: 196vh;
+  align-content: flex-start;
   /* border: 1px solid red; */
 }
 
@@ -169,7 +174,7 @@ nav button:hover {
   outline: 1.5px solid rgba(255, 255, 255, 1);
 }
 
-.loading-bar-container {
+.loading .loading-bar-container {
   margin-left: 20vw;
   margin-top: 20vh;
   width: 100%;
@@ -177,7 +182,7 @@ nav button:hover {
   background-color: #f0f0f0;
 }
 
-.loading-bar {
+.loading .loading-bar {
   width: 50%;
   height: 100%;
   background-color: #a8a8a8;
@@ -196,7 +201,6 @@ nav button:hover {
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
-  width: 100%;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
@@ -215,6 +219,7 @@ div.error {
   border-radius: 4px;
   margin: 20px 0;
 }
+
 
 
 
@@ -247,7 +252,9 @@ div.error {
   .photos-container {
     margin-left: -10%;
     margin-right: -10%;
+    width: 91vw;
   }
+
 
 
 

@@ -6,11 +6,14 @@
   right: 0;
   z-index: 1;
   margin-top: max(2vh, 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tag-menu .header {
-  margin-left: 20%;
-  margin-top: 5vh;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
   font-size:20px;
   color: #fff;
   position: relative;
@@ -23,7 +26,7 @@
   font-size: 20px;
   margin-bottom: 2%;
   min-width: 50px;
-  width: 50%;
+  /* width: 100px; */
   padding: 4px;
   text-align: center;
   border-radius: 10px;

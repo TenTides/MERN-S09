@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './Card.css';
 
 
-const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onClickOutside, isSelected, onDeleteTag, onAddTag }) => {
+const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onClickOutside, isSelected, onDeleteTag, onAddTag, isMobile }) => {
   const [isEnlarged, setIsEnlarged] = useState(false);
   const [showTagInput, setTagInput] = useState(false);
   const [localTags, setLocalTags] = useState(tags);
@@ -12,25 +12,38 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
 
   useEffect(() => {
     const adjustImageSize = () => {
-      console.log('adjustnig size');
       const imgElement = imgRef.current;
       const cardElement = imgElement.parentElement;
   
       if (imgElement) {
         const aspectRatio = imgElement.width / imgElement.height;
-  
+        // Landscape image
         if (aspectRatio > 1) {
-          // Landscape image
-          cardElement.style.maxWidth = '40vw';
-          imgElement.style.maxWidth = '40vw';
-          cardElement.style.maxHeight = 'auto';
-          imgElement.style.maxHeight = 'auto';
-        } else {
-          // Portrait image
-          cardElement.style.maxWidth = 'auto';
-          imgElement.style.maxWidth = 'auto';
-          cardElement.style.maxHeight = '30vh';
-          imgElement.style.maxHeight = '30vh';
+          if(isMobile) {
+            cardElement.style.maxWidth = '300px';
+            imgElement.style.maxWidth = '300px';
+            cardElement.style.maxHeight = 'auto';
+            imgElement.style.maxHeight = 'auto';
+          }
+          else {
+            cardElement.style.maxWidth = '600px';
+            imgElement.style.maxWidth = '600px';
+            cardElement.style.maxHeight = 'auto';
+            imgElement.style.maxHeight = 'auto';
+          }
+        } else { // Portrait image
+          if(isMobile) {
+            cardElement.style.maxWidth = 'auto';
+            imgElement.style.maxWidth = 'auto';
+            cardElement.style.maxHeight = '15vh';
+            imgElement.style.maxHeight = '15vh';
+          }
+          else {
+            cardElement.style.maxWidth = 'auto';
+            imgElement.style.maxWidth = 'auto';
+            cardElement.style.maxHeight = '400px';
+            imgElement.style.maxHeight = '400px';
+          }
         }
       }
     };
@@ -61,17 +74,31 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
         const aspectRatio = imgElement.width / imgElement.height;
   
         if (aspectRatio > 1) {
-          // Landscape image
-          cardElement.style.maxWidth = '40vw'; // Set the original max width
-          cardElement.style.maxHeight = 'auto';
-          imgElement.style.maxWidth = '40vw';
-          imgElement.style.maxHeight = 'auto';
-        } else {
-          // Portrait image
-          cardElement.style.maxWidth = 'auto';
-          cardElement.style.maxHeight = '30vh'; // Set the original max height
-          imgElement.style.maxWidth = 'auto';
-          imgElement.style.maxHeight = '30vh';
+          if(isMobile) {
+            cardElement.style.maxWidth = '300px';
+            imgElement.style.maxWidth = '300px';
+            cardElement.style.maxHeight = 'auto';
+            imgElement.style.maxHeight = 'auto';
+          }
+          else {
+            cardElement.style.maxWidth = '600px';
+            imgElement.style.maxWidth = '600px';
+            cardElement.style.maxHeight = 'auto';
+            imgElement.style.maxHeight = 'auto';
+          }
+        } else { // Portrait image
+          if(isMobile) {
+            cardElement.style.maxWidth = 'auto';
+            imgElement.style.maxWidth = 'auto';
+            cardElement.style.maxHeight = '15vh';
+            imgElement.style.maxHeight = '15vh';
+          }
+          else {
+            cardElement.style.maxWidth = 'auto';
+            imgElement.style.maxWidth = 'auto';
+            cardElement.style.maxHeight = '400px';
+            imgElement.style.maxHeight = '400px';
+          }
         }
       }
     }
@@ -88,22 +115,31 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
       const aspectRatio = imgElement.width / imgElement.height;
   
       if (aspectRatio > 1) {
-        // Landscape image
-        const currentMaxWidth = parseFloat(window.getComputedStyle(cardElement).maxWidth);
-        const newMaxWidth = currentMaxWidth * 2;
-        cardElement.style.maxWidth = `${newMaxWidth}px`;
-        console.log('new max width', newMaxWidth);
-        cardElement.style.maxHeight = 'auto';
-        imgElement.style.maxWidth = `${newMaxWidth}px`; // Set the image width to 100%
-        imgElement.style.maxHeight = 'auto';
-      } else {
-        // Portrait image
-        const currentMaxHeight = parseFloat(window.getComputedStyle(cardElement).maxHeight);
-        const newMaxHeight = currentMaxHeight * 2;
-        cardElement.style.maxWidth = 'auto';
-        cardElement.style.maxHeight = `${newMaxHeight}px`;
-        imgElement.style.maxWidth = 'auto';
-        imgElement.style.maxHeight = `${newMaxHeight}px`; // Set the image height to 100%
+        if(isMobile) {
+          cardElement.style.maxWidth = '600px';
+          imgElement.style.maxWidth = '600px';
+          cardElement.style.maxHeight = 'auto';
+          imgElement.style.maxHeight = 'auto';
+        }
+        else {
+          cardElement.style.maxWidth = '1200px';
+          imgElement.style.maxWidth = '1200px';
+          cardElement.style.maxHeight = 'auto';
+          imgElement.style.maxHeight = 'auto';
+        }
+      } else { // Portrait image
+        if(isMobile) {
+          cardElement.style.maxWidth = 'auto';
+          imgElement.style.maxWidth = 'auto';
+          cardElement.style.maxHeight = '30vh';
+          imgElement.style.maxHeight = '30vh';
+        }
+        else {
+          cardElement.style.maxWidth = 'auto';
+          imgElement.style.maxWidth = 'auto';
+          cardElement.style.maxHeight = '800px';
+          imgElement.style.maxHeight = '800px';
+        }
       }
     }
   };
