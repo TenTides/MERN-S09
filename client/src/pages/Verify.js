@@ -8,7 +8,6 @@ import './Verify.css';
 
 const Verify = () => {
   const location = useLocation();
-  const history = useHistory(); 
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get('token');
   const [message, setMessage] = useState("");
