@@ -56,7 +56,7 @@ const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
             }
         })
         const json = await response.json()
-        setLoad(false);
+        //setLoad(false);
         if(!response.ok)
         {
             setError(json.error)
@@ -66,18 +66,18 @@ const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
             setFile('')
             setTags('')
             setError(null)
-            setLoad(true);
+            //setLoad(true);
             console.log(load);
             console.log('New Photo Added', json)
-            //dispatch({type:"CREATE_PHOTO",payload: json})
+            dispatch({type:"CREATE_PHOTO",payload: json})
 
             try {
                 const response = await fetch('/profile/photos');
                 const updatedJson = await response.json();
                 if (response.ok) {
-                  //dispatch({ type: 'SET_PHOTOS', payload: updatedJson });
-                  const updatedAllTags = extractUniqueTags(updatedJson);
-                  setAllTags(updatedAllTags);
+                  dispatch({ type: 'SET_PHOTOS', payload: updatedJson });
+                  //const updatedAllTags = extractUniqueTags(updatedJson);
+                  //setAllTags(updatedAllTags);
                 } else {
                   console.error('Error fetching photos after upload:', updatedJson.error);
                 }
