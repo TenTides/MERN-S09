@@ -139,25 +139,29 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
   const addTag = () => {
     const inputElement = document.getElementById('addTagInput');
     const newTag = inputElement.value.trim();
-  
+
     if (newTag !== '') {
-      setLocalTags((prevTags) => {
-        const updatedTags = [...prevTags, newTag];
-        console.log("updating local");
-        return updatedTags;
-      });
-  
+      const updatedTags = [...localTags, newTag];
+      setLocalTags(updatedTags);
+
       const newColor = getColor();
-  
-      setTagColors((prevColors) => ({
+
+      setTagColors(prevColors => ({
         ...prevColors,
         [newTag]: newColor,
       }));
-  
+
+
       onAddTag(photoId, newTag);
+      console.log("added ", newTag);
+      console.log(tags);
       setTagInput(false);
     }
   };
+
+  useEffect(() => {
+    setLocalTags(tags);
+  }, [tags]);
 
   const getColorForTag = (tag) => {
     if (tagColors[tag]) {

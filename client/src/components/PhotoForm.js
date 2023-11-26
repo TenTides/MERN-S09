@@ -92,7 +92,6 @@ const PhotoForm = ({onClose, userID, reload}) =>
               type="text" 
               onChange={(e) => {
                 const inputValue = e.target.value;
-                // Conditionally set tags only if the input is not empty
                 if (inputValue.trim() !== '') {
                     setTags(inputValue);
                 }

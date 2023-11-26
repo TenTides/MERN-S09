@@ -1,4 +1,4 @@
-form {
+.create {
   background-color: #1D1F23;
   border: 1px solid #fff;
   color: #fff;
@@ -12,12 +12,16 @@ form {
   z-index: 2;
 }
 
-form button {
+.create button {
   background-color: transparent;
   border: 1px solid #fff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-form h3 {
+.create h3 {
   text-align: center;
 }
 
