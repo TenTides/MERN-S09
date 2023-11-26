@@ -46,7 +46,7 @@ const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
         setLoad(true);
         if (tags.trim() !== '') {
           photo.tags = tags;
-      }
+        }
         const response = await fetch('/profile/photos',{
             method: 'POST',
             body: JSON.stringify(photo),
@@ -69,13 +69,13 @@ const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
             setLoad(true);
             console.log(load);
             console.log('New Photo Added', json)
-            dispatch({type:"CREATE_PHOTO",payload: json})
+            //dispatch({type:"CREATE_PHOTO",payload: json})
 
             try {
                 const response = await fetch('/profile/photos');
                 const updatedJson = await response.json();
                 if (response.ok) {
-                  dispatch({ type: 'SET_PHOTOS', payload: updatedJson });
+                  //dispatch({ type: 'SET_PHOTOS', payload: updatedJson });
                   const updatedAllTags = extractUniqueTags(updatedJson);
                   setAllTags(updatedAllTags);
                 } else {

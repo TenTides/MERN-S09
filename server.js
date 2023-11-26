@@ -2,7 +2,7 @@ require('dotenv').config()
 const session = require('express-session');
 const express = require('express')
 const path = require('path')
-//const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose')
 const photoRoutes = require('./routes/photos')
 const userRoutes = require('./routes/users');
@@ -19,9 +19,9 @@ app.use(session({
     secret: 'JBwFVv2W##24D1H!kv%e6%43uV%bY1#CN78S9L9uwP1@RH*HXQ',
     resave: false,
     saveUninitialized: true,
-    // store: new MongoStore({ 
-    //     mongoUrl: process.env.MONGO_URI
-    // })
+    store: new MongoStore({ 
+        mongoUrl: process.env.MONGO_URI
+    })
 }));
 // Debugging Scripts Runs on every request, logging each request
 app.use('/profile/photos',photoRoutes)
