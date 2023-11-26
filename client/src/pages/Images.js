@@ -54,7 +54,7 @@ const Images = () => {
           setUserId(data.userId);
           console.log('Token from session:', data.userId);
         } else {
-          navigate('/login');
+          navigate('/account');
         }
       })
       .catch((error) => console.error('Error fetching session data:', error));
@@ -310,7 +310,7 @@ const Images = () => {
 
   const clearSession = () => {
     setUserId(null);
-    navigate('/register');
+    navigate('/account');
   };
   
   
