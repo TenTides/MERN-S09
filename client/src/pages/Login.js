@@ -60,11 +60,11 @@ const Login = () => {
                     <form action="" class="signin-form">
                         <h2 class="title">Sign in</h2>
                         <div class="input-field">
-                            <i class="fas fa-envelope"></i>
+                            <img src="client/icons/envelope-solid.svg" class="image" alt="" />
                             <input type="email" placeholder="Email" />
                         </div>
                         <div class="input-field">
-                            <i class="fas fa-lock"></i>
+                            <img src="client/icons/lock-solid.svg" class="image" alt="" />
                             <input type="password" placeholder="Password" />
                         </div>
                         <input type="submit" value="Login" class="btn solid" />
