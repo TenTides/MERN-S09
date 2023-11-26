@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import {Link } from 'react-router-dom';
+
 
 import './Verify.css';
 
@@ -29,7 +31,6 @@ const Verify = () => {
           console.error('Error fetching data:', response);
           return;
         }
-
         const json = await response.json();
         setMessage(json.message);
       } catch (error) {
@@ -44,6 +45,11 @@ const Verify = () => {
   return (
     <div className="center-text">
       <h1>{message}</h1>
+      <Link to="http://poosd.com">
+        <button>
+          Redirect to poosd.com
+        </button>
+      </Link>
     </div>
   );
 };
