@@ -14,6 +14,21 @@ const Account = () => {
     const [registerPassword, setRegisterPassword] = useState('');
     const navigate = useNavigate();
 
+    useEffect(() => {
+      fetch('/api/session')
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.userId) {
+            navigate('/images')
+            console.log('Token from session:', data.userId);
+          } else {
+
+          }
+        })
+        .catch((error) => console.error('Error fetching session data:', error));
+    }, [])
+
+
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
     
