@@ -54,7 +54,7 @@ const Images = () => {
           setUserId(data.userId);
           console.log('Token from session:', data.userId);
         } else {
-          navigate('/login');
+          navigate('/account');
         }
       })
       .catch((error) => console.error('Error fetching session data:', error));
@@ -181,6 +181,7 @@ const Images = () => {
         const updatedPhotos = photos.filter(photo => photo._id !== photoId);
         dispatch({ type: 'SET_PHOTOS', payload: updatedPhotos });
         fetchPhotos();
+        setAllTags(extractUniqueTags(updatedPhotos));
       } else {
         const data = await response.json();
         console.error('Error deleting photo!:', data.error);
@@ -310,7 +311,7 @@ const Images = () => {
 
   const clearSession = () => {
     setUserId(null);
-    navigate('/register');
+    navigate('/account');
   };
   
   
@@ -380,7 +381,7 @@ const Images = () => {
         {showForm && (
           <div className="overlay"></div>
         )}
-        {showForm && <PhotoForm onClose={handleFormClose} userID={userId} reload={fetchPhotos()} />}
+        {showForm && <PhotoForm extractUniqueTags={extractUniqueTags} setAllTags={setAllTags} onClose={handleFormClose} userID={userId} reload={fetchPhotos()} />}
         <div className="cards">
         {loading ? (
             <div className="loading">

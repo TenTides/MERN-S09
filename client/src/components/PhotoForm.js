@@ -2,7 +2,7 @@ import { useState } from "react"
 import { usePhotosContext } from "../hooks/usePhotosContext"
 import './PhotoForm.css'
 
-const PhotoForm = ({onClose, userID, reload}) =>
+const PhotoForm = ({extractUniqueTags, setAllTags, onClose, userID, reload}) =>
 {   
     const {dispatch} = usePhotosContext()
 
@@ -56,13 +56,15 @@ const PhotoForm = ({onClose, userID, reload}) =>
             setTags('')
             setError(null)
             console.log('New Photo Added', json)
-            // dispatch({type:"CREATE_PHOTO",payload: json})
+            dispatch({type:"CREATE_PHOTO",payload: json})
 
             try {
                 const response = await fetch('/profile/photos');
                 const updatedJson = await response.json();
                 if (response.ok) {
                   dispatch({ type: 'SET_PHOTOS', payload: updatedJson });
+                  const updatedAllTags = extractUniqueTags(updatedJson);
+                  setAllTags(updatedAllTags);
                 } else {
                   console.error('Error fetching photos after upload:', updatedJson.error);
                 }
