@@ -204,6 +204,10 @@ form.signup-form{
   transform: translateX(800px);
 }
 
+#error-message{
+    padding-top: 20px;
+}
+
 /* ANIMATION */
 .container.signup-mode:before{
   transform: translate(100%, -50%);
@@ -351,7 +355,7 @@ form.signup-form{
       bottom: 72%;
       left: 50%;
   }
-
+  
   .container.signup-mode:before{
       bottom: 28%;
       left: 50%;
