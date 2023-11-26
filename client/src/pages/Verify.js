@@ -11,6 +11,9 @@ const Verify = () => {
   const token = searchParams.get('token');
   const [message, setMessage] = useState("");
 
+  const handleRedirect = () => {
+    history.replace('http://poosd.com');
+  };
   useEffect(() => {
     
     const verification = async () => {
@@ -30,9 +33,6 @@ const Verify = () => {
           console.error('Error fetching data:', response);
           return;
         }
-        setTimeout(() => {
-          history.replace('http://poosd.com');
-        }, 5000);
         const json = await response.json();
         setMessage(json.message);
       } catch (error) {
@@ -47,6 +47,9 @@ const Verify = () => {
   return (
     <div className="center-text">
       <h1>{message}</h1>
+      <button onClick={handleRedirect}>
+        Home
+      </button>
     </div>
   );
 };
