@@ -90,11 +90,11 @@ const updatePhoto = async (req, res) => {
 const searchPhotos = async (req, res) => {
     const searchField = req.body.fieldName;
     let searchValue = req.body.fieldValue;
- 
+    const searchValues = Array.isArray(searchValue) ? searchValue : [searchValue];
     console.log('Search Field:', searchField);
-    console.log('Search Value:', searchValue);
+    console.log('Search Value:', searchValues);
 
-    if (!searchValue || searchValue.length === 0) {
+    if (!searchValues || searchValue.length === 0) {
         try {
             const allRecords = await photos.find({ userID: req.session.userId }).sort({ createdAt: -1 });
             res.status(200).json(allRecords);
@@ -105,16 +105,16 @@ const searchPhotos = async (req, res) => {
     }
 
     // Create a regular expression to perform a wildcard search
-    const searchRegexArray = searchValue.map(value => new RegExp(value, 'i'));
+    const searchRegexArray = searchValues.map(value => new RegExp(value, 'i'));
 
     try {
         // Initial query object with userID condition
         const query = { userID: req.session.userId };
 
         // Extend the query object based on the search field
-        if (searchValue && searchField === 'tags') {
+        if (searchValues && searchField === 'tags') {
             query[searchField] = { $all: searchRegexArray };
-        } else if (searchValue) {
+        } else if (searchValues) {
             query[searchField] = { $in: searchRegexArray };
         }
 
