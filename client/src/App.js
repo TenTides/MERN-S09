@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Images from './pages/Images';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Verify from './pages/Verify';
+
 
 function App() {
   return (
@@ -11,7 +13,8 @@ function App() {
 			<Routes>
 				<Route path="/register" element={<Register/>}></Route>
 				<Route path="/login" element={<Login/>}></Route>
-				<Route path="/images" element={<Images />} />
+				<Route path="/verify" element={<Verify/>}></Route>
+				<Route path="/images" element={<Images />}></Route>
 				<Route path="/" element={<Home/>}>
 			</Route>
 			</Routes>
