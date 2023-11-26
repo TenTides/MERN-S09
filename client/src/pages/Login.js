@@ -3,6 +3,67 @@ import './Login.css';
 import { useNavigate } from 'react-router-dom';
 
 const SignInSignUpForm = () => {
+    const [loginEmail, setLoginEmail] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
+    const [registerEmail, setRegisterEmail] = useState('');
+    const [registerPassword, setRegisterPassword] = useState('');
+    const navigate = useNavigate();
+  
+    const handleLoginSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        const response = await fetch('/api/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: loginEmail,
+            password: loginPassword,
+          }),
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Login successful. Token:', data.token);
+          navigate('/images');
+        } else {
+          const data = await response.json();
+          console.error(data.message);
+        }
+      } catch (error) {
+        console.error('Error during login:', error);
+      }
+    };
+
+    const handleRegisterSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        const response = await fetch('/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: registerEmail,
+            password: registerPassword,
+          }),
+        });
+  
+        if (response.ok) {
+          console.log("Registration successful");
+          navigate('/login');
+        } else {
+          const data = await response.json();
+          console.error(data.message);
+        }
+      } catch (error) {
+        console.error('Error during registration:', error);
+      }
+    };
+
     useEffect(() => {
       const signin_btn = document.querySelector("#signin-btn");
       const signup_btn = document.querySelector("#signup-btn");
@@ -153,4 +214,4 @@ const SignInSignUpForm = () => {
     );
   };
   
-  export { Login, Register };
+  export { Login, Register,SignInSignUpForm };
