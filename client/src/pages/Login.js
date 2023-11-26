@@ -3,6 +3,9 @@ import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import logImage from './img/log.svg';  // Import the image
+import regImage from './img/reg.svg';  // Import the image
+
 
 const SignInSignUpForm = ({
     loginEmail, setLoginEmail, loginPassword, setLoginPassword, handleLoginSubmit,
@@ -78,7 +81,7 @@ const SignInSignUpForm = ({
                             <p>Create an account and start using #Photo4U</p>
                             <button className="btn transparent" id="signup-btn">Sign up</button>
                         </div>
-                        <img src="./pages/img/log.svg" className="image" alt="" />
+                        <img src={logImage} className="image" alt="" />
                     </div>
         
                     {/* Right Panel */}
@@ -88,7 +91,7 @@ const SignInSignUpForm = ({
                             <p>Login and welcome back to #Photo4U</p>
                             <button className="btn transparent" id="signin-btn">Sign in</button>
                         </div>
-                        <img src="./pages/img/reg.svg" className="image" alt="" />
+                        <img src={regImage} className="image" alt="" />
                     </div>
                 </div>
             </div>
