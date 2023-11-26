@@ -90,7 +90,7 @@ const updatePhoto = async (req, res) => {
 const searchPhotos = async (req, res) => {
     const searchField = req.body.fieldName;
     let searchValue = req.body.fieldValue;
-
+ 
     console.log('Search Field:', searchField);
     console.log('Search Value:', searchValue);
 
