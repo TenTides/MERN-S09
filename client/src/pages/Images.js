@@ -27,22 +27,20 @@ const Images = () => {
   const [isCardEnlarged, setIsCardEnlarged] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [allPhotos, setAllPhotos] = useState([]);
+  const [allTags, setAllTags] = useState([]);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const navigate = useNavigate();  
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 600); // Adjust the width as needed
+      setIsMobile(window.innerWidth <= 600);
     };
 
-    // Set the initial state
     handleResize();
 
-    // Add a resize event listener to track changes
     window.addEventListener('resize', handleResize);
 
-    // Remove the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -106,9 +104,10 @@ const Images = () => {
         console.log(json);
         setLoading(false);
         setFadeIn(true);
+        setAllTags(extractUniqueTags(json));
       }
     };
-    fetchPhotos();
+    fetchPhotos();    
   }, [dispatch]);
 
   const fetchPhotos = async () => {
@@ -139,8 +138,6 @@ const Images = () => {
     return uniqueTags;
   };
   
-  const allTags = extractUniqueTags(allPhotos);
-
   const handleUploadButtonClick = () => {
     setShowForm(true);
   };
@@ -272,6 +269,8 @@ const Images = () => {
           }
           return photo;
         });
+        const updatedAllTags = extractUniqueTags(updatedPhotos);
+        setAllTags(updatedAllTags);
         dispatch({ type: 'SET_PHOTOS', payload: updatedPhotos });
       } else {
         const data = await response.json();
@@ -280,6 +279,7 @@ const Images = () => {
     } catch (error) {
       console.error('Error updating photo tags2:', error.message);
     }
+    console.log("add tag", )
   };
 
   const handleProfileButtonClick = async () => {
@@ -310,7 +310,7 @@ const Images = () => {
 
   const clearSession = () => {
     setUserId(null);
-    navigate('/login');
+    navigate('/register');
   };
   
   

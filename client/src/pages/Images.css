@@ -26,17 +26,18 @@
   margin-left: 1vw;
   display: flex;
   align-items: center;
-  font-weight: lighter;
+  font-weight: light;
 }
 
 .s_nav .logo img {
   margin-right: 6px;
+  margin-top: 1px;
 }
 
 
 .s_nav input{
   width: 25vw;
-  height: max(5vh, 35px);
+  height: max(5vh, 40px);
   outline: 1px solid #fff;
   border-radius: 5px;
   box-sizing: border-box;
@@ -92,7 +93,8 @@
 }
 
 nav button {
-  margin-left: 2vw;
+  margin-left: 10vw;
+  margin-top: -1vh;
   font-size: 22px;
   border: 1px solid #fff;
   border-radius: 5px;
@@ -200,11 +202,8 @@ nav button:hover {
   box-sizing: border-box;
 }
 .body form button {
-  background: var(--primary);
-  border: 0;
   color: #fff;
   padding: 10px;
-  font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
 }

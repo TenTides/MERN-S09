@@ -105,20 +105,19 @@ const searchPhotos = async (req, res) => {
     }
 
     // Create a regular expression to perform a wildcard search
-    const searchRegex = new RegExp(searchValue, 'i'); // 'i' for case-insensitive search
-
+    const searchRegexArray = searchValue.map(value => new RegExp(value, 'i'));
 
     try {
         // Initial query object with userID condition
         const query = { userID: req.session.userId };
+
         // Extend the query object based on the search field
         if (searchValue && searchField === 'tags') {
-            query[searchField] = { $in: searchRegex };
+            query[searchField] = { $all: searchRegexArray };
         } else if (searchValue) {
-            query[searchField] = searchRegex;
+            query[searchField] = { $in: searchRegexArray };
         }
 
-        // Combine userID condition and search condition
         const records = await photos.find(query).sort({ createdAt: -1 });
         console.log(records.length);
         res.status(200).json(records);

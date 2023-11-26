@@ -5,6 +5,7 @@ import './global.css';
 const TagMenu = ({ tags, onSelectTag }) => {
   const [selectedTags, setSelectedTags] = useState([]);
 
+
   const handleTagClick = (tag) => {
     const newSelectedTags = selectedTags.includes(tag)
       ? selectedTags.filter((selectedTag) => selectedTag !== tag)
