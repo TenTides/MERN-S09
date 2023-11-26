@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import './Verify.css';
 
 const Verify = () => {
   const location = useLocation();
+  const history = useHistory(); 
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get('token');
   const [message, setMessage] = useState("");
@@ -32,6 +33,9 @@ const Verify = () => {
 
         const json = await response.json();
         setMessage(json.message);
+        setTimeout(() => {
+          history.push('http://poosd.com');
+        }, 5000);
       } catch (error) {
         console.log('Token:', token);
         console.error('Error fetching data:', error.message);
