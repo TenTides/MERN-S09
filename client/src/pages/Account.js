@@ -12,6 +12,7 @@ const Account = () => {
     const [loginPassword, setLoginPassword] = useState('');
     const [registerEmail, setRegisterEmail] = useState('');
     const [registerPassword, setRegisterPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
