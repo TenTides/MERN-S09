@@ -30,12 +30,11 @@ const Verify = () => {
           console.error('Error fetching data:', response);
           return;
         }
-
+        setTimeout(() => {
+          history.replace('http://poosd.com');
+        }, 5000);
         const json = await response.json();
         setMessage(json.message);
-        setTimeout(() => {
-          history.push('http://poosd.com');
-        }, 5000);
       } catch (error) {
         console.log('Token:', token);
         console.error('Error fetching data:', error.message);
