@@ -163,7 +163,6 @@ const SignInSignUpForm = ({
   
         if (response.ok) {
           console.log("Registration successful");
-          navigate('/login');
         } else {
           const data = await response.json();
           console.error(data.message);
