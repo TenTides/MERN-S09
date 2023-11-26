@@ -4,68 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
-const SignInSignUpForm = () => {
-    const [loginEmail, setLoginEmail] = useState('');
-    const [loginPassword, setLoginPassword] = useState('');
-    const [registerEmail, setRegisterEmail] = useState('');
-    const [registerPassword, setRegisterPassword] = useState('');
-    const navigate = useNavigate();
-  
-    const handleLoginSubmit = async (e) => {
-      e.preventDefault();
-  
-      try {
-        const response = await fetch('/api/users/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: loginEmail,
-            password: loginPassword,
-          }),
-        });
-  
-        if (response.ok) {
-          const data = await response.json();
-          console.log('Login successful. Token:', data.token);
-          navigate('/images');
-        } else {
-          const data = await response.json();
-          console.error(data.message);
-        }
-      } catch (error) {
-        console.error('Error during login:', error);
-      }
-    };
-
-    const handleRegisterSubmit = async (e) => {
-      e.preventDefault();
-  
-      try {
-        const response = await fetch('/api/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: registerEmail,
-            password: registerPassword,
-          }),
-        });
-  
-        if (response.ok) {
-          console.log("Registration successful");
-          navigate('/login');
-        } else {
-          const data = await response.json();
-          console.error(data.message);
-        }
-      } catch (error) {
-        console.error('Error during registration:', error);
-      }
-    };
-
+const SignInSignUpForm = ({
+    loginEmail, setLoginEmail, loginPassword, setLoginPassword, handleLoginSubmit,
+    registerEmail, setRegisterEmail, registerPassword, setRegisterPassword, handleRegisterSubmit,
+}) => {
     useEffect(() => {
       const signin_btn = document.querySelector("#signin-btn");
       const signup_btn = document.querySelector("#signup-btn");
@@ -90,7 +32,7 @@ const SignInSignUpForm = () => {
     }, []); // Empty dependency array ensures that the effect runs once after the initial render
   
     return (
-        <div className="container">
+            <div className="container">
                 <div className="forms-container">
                     <div className="signin-signup">
                         {/* Login Form */}
@@ -136,7 +78,7 @@ const SignInSignUpForm = () => {
                             <p>Create an account and start using #Photo4U</p>
                             <button className="btn transparent" id="signup-btn">Sign up</button>
                         </div>
-                        <img src="./img/log.svg" className="image" alt="" />
+                        <img src="/log.svg" className="image" alt="" />
                     </div>
         
                     {/* Right Panel */}
@@ -146,12 +88,102 @@ const SignInSignUpForm = () => {
                             <p>Login and welcome back to #Photo4U</p>
                             <button className="btn transparent" id="signin-btn">Sign in</button>
                         </div>
-                        <img src="./img/reg.svg" className="image" alt="" />
+                        <img src="/reg.svg" className="image" alt="" />
                     </div>
                 </div>
             </div>
     );
   };
   
+  const Login = () => {
+    const [loginEmail, setLoginEmail] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
+    const navigate = useNavigate();
   
-  export default { SignInSignUpForm };
+    const handleLoginSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        const response = await fetch('/api/users/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: loginEmail,
+            password: loginPassword,
+          }),
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Login successful. Token:', data.token);
+          navigate('/images');
+        } else {
+          const data = await response.json();
+          console.error(data.message);
+        }
+      } catch (error) {
+        console.error('Error during login:', error);
+      }
+    };
+  
+    return (
+        <div>
+            <SignInSignUpForm 
+                loginEmail={loginEmail}
+                setLoginEmail={setLoginEmail}
+                loginPassword={loginPassword}
+                setLoginPassword={setLoginPassword}
+                handleLoginSubmit={handleLoginSubmit}
+            />
+        </div>
+    );
+  };
+  
+  const Register = () => {
+    const [registerEmail, setRegisterEmail] = useState('');
+    const [registerPassword, setRegisterPassword] = useState('');
+    const navigate = useNavigate();
+  
+    const handleRegisterSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        const response = await fetch('/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: registerEmail,
+            password: registerPassword,
+          }),
+        });
+  
+        if (response.ok) {
+          console.log("Registration successful");
+          navigate('/login');
+        } else {
+          const data = await response.json();
+          console.error(data.message);
+        }
+      } catch (error) {
+        console.error('Error during registration:', error);
+      }
+    };
+  
+    return (
+        <div>
+            <SignInSignUpForm 
+                registerEmail={registerEmail}
+                setRegisterEmail={setRegisterEmail}
+                registerPassword={registerPassword}
+                setRegisterPassword={setRegisterPassword}
+                handleRegisterSubmit={handleRegisterSubmit}
+            />
+        </div>
+    );
+  };
+  
+  export { Login, Register };
