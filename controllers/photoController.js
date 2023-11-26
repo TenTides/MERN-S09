@@ -113,7 +113,7 @@ const searchPhotos = async (req, res) => {
         const query = { userID: req.session.userId };
         // Extend the query object based on the search field
         if (searchValue && searchField === 'tags') {
-            query[searchField] = { $in: searchValue };
+            query[searchField] = { $in: searchRegex };
         } else if (searchValue) {
             query[searchField] = searchRegex;
         }
