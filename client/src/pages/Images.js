@@ -348,7 +348,10 @@ const Images = () => {
             <img src={p4ulogo} alt="#p4u" style={{ height: '30px', width: 'auto' }} />
             </div>
         ) : (
-          <div className="logo">#Photo4u</div>
+          <div className="logo">
+            <img src={p4ulogo} alt="#p4u" style={{ height: '30px', width: 'auto' }}/>
+            <span>Photo4u</span>
+          </div>
         )}
         <div className='search'>
         <input
@@ -400,64 +403,6 @@ const Images = () => {
               )}
             </div>
           )}
-
-
-          {/* {loading ? (
-            <div className="loading">LOADING</div>
-          ) : (
-            <div className={`photos-container ${fadeIn ? 'fade-in active' : ''}`}>
-              {todayPhotos.length > 0 && (
-                <CardGroup
-                  heading="Today,"
-                  cardsData={todayPhotos}
-                  onDeleteClick={handleDelete}
-                  selectedCard={selectedCard}
-                  onClickOutside={handleCloseEnlargedCard}
-                  onDeleteTag={deleteTag}
-                  onAddTag={addTag}
-                />
-              )}
-              {thisWeekPhotos.length > 0 && (
-                <CardGroup
-                  heading="This Week,"
-                  cardsData={thisWeekPhotos}
-                  onDeleteClick={handleDelete}
-                  selectedCard={selectedCard}
-                  onClickOutside={handleCloseEnlargedCard}
-                  onDeleteTag={deleteTag}
-                  onAddTag={addTag}
-                />
-              )}
-              {thisMonthPhotos.length > 0 && (
-                <CardGroup
-                  heading="This Month,"
-                  cardsData={thisMonthPhotos}
-                  onDeleteClick={handleDelete}
-                  selectedCard={selectedCard}
-                  onClickOutside={handleCloseEnlargedCard}
-                  onDeleteTag={deleteTag}
-                  onAddTag={addTag}
-                />
-              )}
-              {pastMonthPhotos.length > 0 && (
-                <CardGroup
-                  heading="Earlier,"
-                  cardsData={pastMonthPhotos}
-                  onDeleteClick={handleDelete}
-                  selectedCard={selectedCard}
-                  onClickOutside={handleCloseEnlargedCard}
-                  onDeleteTag={deleteTag}
-                  onAddTag={addTag}
-                />
-              )}
-              {todayPhotos.length === 0 &&
-               thisWeekPhotos.length === 0 &&
-               thisMonthPhotos.length === 0 &&
-               pastMonthPhotos.length === 0 && (
-                <p>No images found</p>
-              )}
-            </div>
-          )} */}
         </div>
         {isMobile ? null : <TagMenu tags={allTags} onSelectTag={handleTagSelection} />}
       </div>

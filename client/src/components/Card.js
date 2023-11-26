@@ -90,7 +90,7 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
       if (aspectRatio > 1) {
         // Landscape image
         const currentMaxWidth = parseFloat(window.getComputedStyle(cardElement).maxWidth);
-        const newMaxWidth = currentMaxWidth * 12;
+        const newMaxWidth = currentMaxWidth * 2;
         cardElement.style.maxWidth = `${newMaxWidth}px`;
         console.log('new max width', newMaxWidth);
         cardElement.style.maxHeight = 'auto';
