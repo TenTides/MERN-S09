@@ -1,4 +1,4 @@
-form {
+.create form {
   background-color: #1D1F23;
   border: 1px solid #fff;
   color: #fff;
@@ -12,12 +12,12 @@ form {
   z-index: 2;
 }
 
-form button {
+.create form button {
   background-color: transparent;
   border: 1px solid #fff;
 }
 
-form h3 {
+.create form h3 {
   text-align: center;
 }
 
@@ -30,12 +30,12 @@ form h3 {
   cursor: pointer;
 }
 
-form input:focus {
+.create form input:focus {
   outline: none;
 }
 
 @media only screen and (max-width: 600px){
-  form {
+  .create form {
     width: 80vw;
   }
 }
