@@ -78,7 +78,7 @@ const SignInSignUpForm = ({
                             <p>Create an account and start using #Photo4U</p>
                             <button className="btn transparent" id="signup-btn">Sign up</button>
                         </div>
-                        <img src="pages/img/log.svg" className="image" alt="" />
+                        <img src="./pages/img/log.svg" className="image" alt="" />
                     </div>
         
                     {/* Right Panel */}
@@ -88,7 +88,7 @@ const SignInSignUpForm = ({
                             <p>Login and welcome back to #Photo4U</p>
                             <button className="btn transparent" id="signin-btn">Sign in</button>
                         </div>
-                        <img src="pages/img/reg.svg" className="image" alt="" />
+                        <img src="./pages/img/reg.svg" className="image" alt="" />
                     </div>
                 </div>
             </div>
