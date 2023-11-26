@@ -32,6 +32,24 @@ const Images = () => {
   const navigate = useNavigate();  
   const [isMobile, setIsMobile] = useState(false);
 
+  const fetchPhotos = async () => {
+    try {
+      const response = await fetch('/profile/photos/');
+      if (!response.ok) {
+        console.error('Error fetching photos:', response);
+        return;
+      }
+  
+      const json = await response.json();
+      setAllPhotos(json);
+      dispatch({ type: 'SET_PHOTOS', payload: json });
+      setLoading(false);
+      setFadeIn(true);
+    } catch (error) {
+      console.error('Error fetching photos:', error.message);
+    }
+  };
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 600);
@@ -60,6 +78,7 @@ const Images = () => {
       .catch((error) => console.error('Error fetching session data:', error));
   }, [])
 
+  fetchPhotos()
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -82,24 +101,6 @@ const Images = () => {
   
     fetchUser();
   }, [userId]);
-
-  const fetchPhotos = async () => {
-    try {
-      const response = await fetch('/profile/photos/');
-      if (!response.ok) {
-        console.error('Error fetching photos:', response);
-        return;
-      }
-  
-      const json = await response.json();
-      setAllPhotos(json);
-      dispatch({ type: 'SET_PHOTOS', payload: json });
-      setLoading(false);
-      setFadeIn(true);
-    } catch (error) {
-      console.error('Error fetching photos:', error.message);
-    }
-  };
 
   // useEffect(() => {
   //   // const fetchPhotos = async () => {
