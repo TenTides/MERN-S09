@@ -7,7 +7,7 @@ import logImage from './img/log.svg';  // Import the image
 import regImage from './img/reg.svg';  // Import the image
 
 
-const SignInSignUpForm = () => {
+const Account = () => {
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const [registerEmail, setRegisterEmail] = useState('');
@@ -155,4 +155,4 @@ const SignInSignUpForm = () => {
     );
   };
   
-  export default { SignInSignUpForm };
+  export default { Account };
