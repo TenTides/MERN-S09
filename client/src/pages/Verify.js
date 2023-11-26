@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import {Link } from 'react-router-dom';
+
 
 import './Verify.css';
 
@@ -11,9 +13,6 @@ const Verify = () => {
   const token = searchParams.get('token');
   const [message, setMessage] = useState("");
 
-  const handleRedirect = () => {
-    history.replace('http://poosd.com');
-  };
   useEffect(() => {
     
     const verification = async () => {
@@ -47,9 +46,11 @@ const Verify = () => {
   return (
     <div className="center-text">
       <h1>{message}</h1>
-      <button onClick={handleRedirect}>
-        Home
-      </button>
+      <Link to="http://poosd.com">
+        <button>
+          Redirect to poosd.com
+        </button>
+      </Link>
     </div>
   );
 };
