@@ -4,8 +4,8 @@
   box-sizing: border-box;
 }
 
-body, input{
-  font-family: 'IBM Plex Mono', monospace;
+input{
+  font-family: 'Poppins';
 }
 
 .container{
@@ -50,7 +50,7 @@ body, input{
   transition: 1s 0.7s ease-in-out;
 }
 
-form{
+form.signin-form{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,13 +60,19 @@ form{
   grid-column: 1 / 2;
   grid-row: 1 / 2;
   transition: 0.2s 0.7s ease-in-out;
-}
-
-form.signin-form{
   z-index: 2;
 }
 
 form.signup-form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 5rem;
+  overflow: hidden;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  transition: 0.2s 0.7s ease-in-out;
   z-index: 1;
   opacity: 0;
 }
@@ -87,13 +93,15 @@ form.signup-form{
   display: grid;
   grid-template-columns: 15% 85%;
   padding: 0 .4rem;
+  align-items: center;
 }
 
-.input-field i{
+.input-field .i{
   text-align: center;
   line-height: 55px;
   color: #acacac;
   font-size: 1.1rem;
+  margin-left: 12px;
 }
 
 .input-field input{
