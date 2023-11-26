@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 const SignInSignUpForm = () => {
     const [loginEmail, setLoginEmail] = useState('');
@@ -89,49 +91,65 @@ const SignInSignUpForm = () => {
   
     return (
         <div className="container">
-            <div className="forms-container">
-              <div className="signin-signup">
-                {/* Login Form */}
-                <form action="" className="signin-form">
-                  <h2 className="title">Sign in</h2>
-                  <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
-                  <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
-                  <input type="submit" value="Login" className="btn solid" onClick={handleLoginSubmit} />
-                </form>
-  
-                {/* Register Form */}
-                <form action="" className="signup-form">
-                  <h2 className="title">Sign up</h2>
-                  <input type="email" placeholder="Email" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value)} />
-                  <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} />
-                  <input type="submit" value="Sign up" className="btn solid" onClick={handleRegisterSubmit} />
-                </form>
-              </div>
-            </div>
-  
-            {/* Panels Container */}
-            <div className="panels-container">
-                {/* Left Panel */}
-                <div className="panel left-panel">
-                    <div className="content">
-                        <h3>New here?</h3>
-                        <p>Create an account and start using #Photo4U</p>
-                        <button className="btn transparent" id="signup-btn">Sign up</button>
+                <div className="forms-container">
+                    <div className="signin-signup">
+                        {/* Login Form */}
+                        <form action="" className="signin-form">
+                            <h2 className="title">Sign in</h2>
+                            <div className="input-field">
+                                <FontAwesomeIcon icon={faEnvelope} className='i' />
+                                {/*<img src="/envelope-solid.svg" class="image" alt="" />*/}
+                                <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
+                            </div>
+                            <div className="input-field">
+                                <FontAwesomeIcon icon={faLock} className='i' />
+                                {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
+                                <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                            </div>
+                            <input type="submit" value="Login" className="btn solid" onClick={handleLoginSubmit} />
+                        </form>
+        
+                        {/* Register Form */}
+                        <form action="" className="signup-form">
+                            <h2 className="title">Sign up</h2>
+                            <div className="input-field">
+                                <FontAwesomeIcon icon={faEnvelope} className='i' />
+                                {/*<img src="/envelope-solid.svg" class="image" alt="" />*/}
+                                <input type="email" placeholder="Email" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value)} />
+                            </div>
+                            <div className="input-field">
+                                <FontAwesomeIcon icon={faLock} className='i' />
+                                {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
+                                <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} />
+                            </div>
+                            <input type="submit" value="Sign up" className="btn solid" onClick={handleRegisterSubmit} />
+                        </form>
                     </div>
-                    <img src="client/src/pages/img/log.svg" className="image" alt="" />
                 </div>
     
-                {/* Right Panel */}
-                <div className="panel right-panel">
-                    <div className="content">
-                        <h3>Already a member?</h3>
-                        <p>Login and welcome back to #Photo4U</p>
-                        <button className="btn transparent" id="signin-btn">Sign in</button>
+                {/* Panels Container */}
+                <div className="panels-container">
+                    {/* Left Panel */}
+                    <div className="panel left-panel">
+                        <div className="content">
+                            <h3>New here?</h3>
+                            <p>Create an account and start using #Photo4U</p>
+                            <button className="btn transparent" id="signup-btn">Sign up</button>
+                        </div>
+                        <img src="./img/log.svg" className="image" alt="" />
                     </div>
-                    <img src="client/src/pages/img/reg.svg" className="image" alt="" />
+        
+                    {/* Right Panel */}
+                    <div className="panel right-panel">
+                        <div className="content">
+                            <h3>Already a member?</h3>
+                            <p>Login and welcome back to #Photo4U</p>
+                            <button className="btn transparent" id="signin-btn">Sign in</button>
+                        </div>
+                        <img src="./img/reg.svg" className="image" alt="" />
+                    </div>
                 </div>
             </div>
-        </div>
     );
   };
   
