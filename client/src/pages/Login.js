@@ -154,4 +154,4 @@ const SignInSignUpForm = () => {
   };
   
   
-  export { SignInSignUpForm };
+  export default { SignInSignUpForm };
