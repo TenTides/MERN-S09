@@ -1,114 +1,162 @@
 .Home {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
   text-align: center;
   background-color: #1D1F23;
-  width: 97vw;
-  height: 300vh;
-  position: relative;
-  overflow-x: hidden;  
+  overflow: hidden; 
+	height: 300vh;
 }
 
 .Landing {
   margin-top: 200px;
   display: flex;
   justify-content: center;
-	flex-direction: column;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-
-/* animation for cards */
-
-.square {
-  width: 100px;
-  height: 100px;
-  background-color: red;
-}
-
-.cards {
-  width: 100vw;
-  height: 300vh;
-  position: relative;
-}
-
-.animation-box {
-  width: 100vw;
+.frame-box {
+  width: 100%;
   height: 90vh;
-  /* background-color: red; */
   position: sticky;
   top: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+	margin-top: 10vh;
 }
 
-.animation-box .card {
-  width: 30vw;
-	height: 30vh;
-	transition: transform 0.8s ease-in-out;
+.frame-box img {
+	margin-bottom: 10%;
 }
 
-.anitext {
+.icon-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.icons {
+	max-width: 43%;
+	max-height: 43%;
+	transform: translate(80px, 80px);
+	grid-column: 1 / 2;
+	align-items: flex-start;
+}
+
+.phone {
+	transform: translate(-100px, 150px);
+	padding-right: 20px;
+}
+
+.text-title {
 	color: #fff;
 	font-size: 40px;
 	width: 100vw;
 }
 
-.cardOneFirstMove{
-	transform: translateX(205px);
+.text-h1 {
+	color: #fff;
+	font-size: 25px;
+	width: 100vw;
 }
 
-
-.cardTwoFirstMove{
-	transform: translateY(15px);
-	
+.text-h2 {
+	transform: translateX(-100px);
+	color: #fff;
+	font-size: 20px;
+	width: 10vw;
+	text-align: left;
 }
 
-.cardThreeFirstMove{
-	transform: translateX(-205px) translateY(30px);
+.text-caption {
+	color:#fff;
+	font-size: 20px;
+	width: 50vw;
+	text-align: left;
+	margin-left: 100px; 
 }
 
-.float-cards {
-	display: none;
-}
-
-.float-cards .display {
-	display: block;
-	width: 90vw;
-	height: 30vh;
-	position: relative;
-	/* background-color: red; */
-}
-
-.float-cards .display .card {
-	width: 50px;
-	height: 70px;
-	position: absolute;
-	transition: transform 5s ease, left 5s ease, top 5s ease;
-}
-
-
-.upbtn, .downbtn {
-	width: 75px;
-	height: 75px;
-	padding: 30px;
-	border-radius: 50%;
-	font-size: 50px;
+.image-box {
+	padding-top: 40px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-top: 7%;
-	border: none;
 }
 
-.upbtn:hover, .downbtn:hover {
-	scale: 1.01;
+.img1 {
+	width: 50%;
+	height: 50%;
 }
 
-.upbtn:active, .downbtn:active {
-	background-color: #e8e8e8;
-	scale: 0.99;
-}
+/* Adjust for mobile */
+@media (max-width: 780px) {
+	.Home {
+	  height: auto;
+	}
+  
+	.Landing {
+	  margin-top: 100px;
+	}
+  
+	.frame-box {
+	  height: 150vh;
+	  margin-top: -10vh;
+	  flex-direction: column;
+	}
+  
+	.frame-box img {
+	  margin-bottom: 5%;
+	}
+  
+	.icon-container {
+	  flex-direction: column;
+	  align-items: flex-start; 
+	}
+  
+	.icons {
+	  max-width: 100%;
+	  max-height: auto;
+	  transform: none;
+	}
+  
+	.phone {
+	  transform: none;
+	  padding-right: 0;
+	  max-width: 50%;
+	}
 
-.downbtn {
-	rotate: 180deg;
-}
+	.text-title {
+		font-size: 35px;
+	}
+
+	.text-h1 {
+		font-size: 20px;
+	}
+  
+	.text-h2 {
+	  font-size: 20px;
+	  width: 40vh;
+	  transform: none; 
+	  text-align: center;
+	}
+  
+	.text-caption {
+	  width: 100%; 
+	  text-align: center; 
+	  margin-left: 0;
+	}
+  
+	.image-box {
+	  margin-top: -10vh;
+	  height: auto; 
+	  padding: 2% 2%; 
+	}
+  
+	.img1 {
+		width: 80%;
+		height: 80%;
+	}
+  }
