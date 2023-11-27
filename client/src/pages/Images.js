@@ -318,15 +318,19 @@ const Images = () => {
     }
   };
 
+  const goHome = () => {
+    navigate('/');
+  }
+
   return (
     <div className='body'>
       <nav className='s_nav'>
       {isMobile ? (
-          <div className="logo">
+          <div className="logo" onClick={goHome}>
             <img src={p4ulogo} alt="#p4u" style={{ height: '30px', width: 'auto' }} />
             </div>
         ) : (
-          <div className="logo">
+          <div className="logo" onClick={goHome}>
             <img src={p4ulogo} alt="#p4u" style={{ height: '30px', width: 'auto' }}/>
             <span>Photo4u</span>
           </div>
