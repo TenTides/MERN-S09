@@ -1,7 +1,8 @@
 import React, {useRef, useState, useEffect} from 'react';
 import Card from '../components/Card';
 import Navbar from '../components/Navbar';
-import phoneFrame from './img/phone-frame.png'; // Import image
+import phone1 from './img/iphone1.png'; // Import image
+import phone2 from './img/iphone2.png'; // Import image
 import img1 from './img/img1.svg'; // Import image
 import photo from './img/super-awesome-photos.png'; // Import image
 import './Home.css';
@@ -19,9 +20,9 @@ const Home = () => {
         </div>
         <div className="frame-box">
           <div className='text-h2'>Our app will allow you to upload your photos</div>
-          <img src={phoneFrame} className='phone' alt="" /> {/*Show uploading images*/}
+          <img src={phone1} className='phone' alt="" /> {/*Show uploading images*/}
           <div className='text-h2'>And view all of the photos you've uploaded</div>
-          <img src={phoneFrame} className='phone' alt="" /> {/*Show /images page*/}
+          <img src={phone2} className='phone' alt="" /> {/*Show /images page*/}
         </div>
         <div className="image-box">
           <img src={photo} className='img1' alt="" />
