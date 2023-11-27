@@ -128,7 +128,7 @@ const Account = () => {
                                 {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
                                 <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required maxLength="50" />
                             </div>
-                            {/* <input type="submit" value="Login" className="btn solid" onClick={handleLoginSubmit} /> */}
+                            <input type="submit" value="Login" className="btn solid"/>
                         </form>
         
                         {/* Register Form */}
@@ -145,11 +145,11 @@ const Account = () => {
                                 {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
                                 <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} required maxLength="50"/>
                             </div>
-                            {/* <input type="submit" value="Sign up" className="btn solid" onClick={handleRegisterSubmit} /> */}
+                            <input type="submit" value="Sign up" className="btn solid"/>
                         </form>
                     </div>
                 </div>
-    
+   
                 {/* Panels Container */}
                 <div className="panels-container">
                     {/* Left Panel */}
