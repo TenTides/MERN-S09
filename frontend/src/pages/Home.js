@@ -22,6 +22,15 @@ const Home = () => {
           <div className='text-h2'>And view all of the photos you've uploaded</div>
           <img src={phoneFrame} className='phone' alt="" /> {/*Show /images page*/}
         </div>
+        <div className="image-box">
+          <div className='img1'>
+            <img src={phoneFrame} alt="" />
+          </div>
+          <div className='img2'>
+            <img id="1" src={phoneFrame} alt="" />
+            <img id="2" src={phoneFrame} alt="" />
+          </div>
+        </div>
       </div>
     </div>
   );
