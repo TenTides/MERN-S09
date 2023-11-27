@@ -76,6 +76,7 @@ const Account = () => {
     
           if (response.ok) {
             console.log("Registration successful");
+            setRegisterError("Check your email for a confirmation link.");
           } else {
             const data = await response.json();
             setRegisterError(data.message); // Set error message            
