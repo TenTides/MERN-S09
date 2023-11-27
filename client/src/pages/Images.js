@@ -101,9 +101,9 @@ const Images = () => {
     fetchUser();
   }, [userId]);
 
-  // useEffect(() => {
-  //   fetchPhotos();    
-  // }, []);
+  useEffect(() => {
+    fetchPhotos();    
+  }, []);
 
   const extractUniqueTags = (photos) => {
     const allTags = photos.reduce((tags, photo) => {
@@ -358,7 +358,7 @@ const Images = () => {
         {showForm && (
           <div className="overlay"></div>
         )}
-        {showForm && <PhotoForm extractUniqueTags={extractUniqueTags} setAllTags={setAllTags} onClose={handleFormClose} userID={userId} reload={fetchPhotos()} />}
+        {showForm && <PhotoForm extractUniqueTags={extractUniqueTags} setAllTags={setAllTags} onClose={handleFormClose} userID={userId}/>}
         <div className="cards">
         {loading ? (
             <div className="loading">
