@@ -115,37 +115,37 @@ const Account = () => {
                 <div className="forms-container">
                     <div className="signin-signup">
                         {/* Login Form */}
-                        <form action="" className="signin-form">
+                        <form action="" className="signin-form" onSubmit={handleLoginSubmit}>
                             <h2 className="title">Sign in</h2>
                             {loginError && <p className="error-message">{loginError}</p>}
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faEnvelope} className='i' />
                                 {/*<img src="/envelope-solid.svg" class="image" alt="" />*/}
-                                <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} required/>
+                                <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} required maxLength="50"/>
                             </div>
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faLock} className='i' />
                                 {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
-                                <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required/>
+                                <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required maxLength="50" />
                             </div>
-                            <input type="submit" value="Login" className="btn solid" onClick={handleLoginSubmit} />
+                            {/* <input type="submit" value="Login" className="btn solid" onClick={handleLoginSubmit} /> */}
                         </form>
         
                         {/* Register Form */}
-                        <form action="" className="signup-form">
+                        <form action="" className="signup-form" onSubmit={handleRegisterSubmit}>
                             <h2 className="title">Sign up</h2>
                             {registerError && <p className="error-message">{registerError}</p>}
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faEnvelope} className='i' />
                                 {/*<img src="/envelope-solid.svg" class="image" alt="" />*/}
-                                <input type="email" placeholder="Email" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value)} required/>
+                                <input type="email" placeholder="Email" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value)} required maxLength="50"/>
                             </div>
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faLock} className='i' />
                                 {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
-                                <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} required/>
+                                <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} required maxLength="50"/>
                             </div>
-                            <input type="submit" value="Sign up" className="btn solid" onClick={handleRegisterSubmit} />
+                            {/* <input type="submit" value="Sign up" className="btn solid" onClick={handleRegisterSubmit} /> */}
                         </form>
                     </div>
                 </div>
