@@ -101,9 +101,9 @@ const Images = () => {
     fetchUser();
   }, [userId]);
 
-  useEffect(() => {
-    fetchPhotos();    
-  }, []);
+  // useEffect(() => {
+  //   fetchPhotos();    
+  // }, []);
 
   const extractUniqueTags = (photos) => {
     const allTags = photos.reduce((tags, photo) => {
