@@ -208,6 +208,9 @@ form.signup-form{
     padding-top: 20px;
     color: #fff;
 }
+.error-message{
+  color: #fff;
+}
 
 /* ANIMATION */
 .container.signup-mode:before{
