@@ -87,12 +87,16 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
             imgElement.style.maxWidth = '300px';
             cardElement.style.maxHeight = 'auto';
             imgElement.style.maxHeight = 'auto';
+            cardElement.style.minWidth = '200px';
+            imgElement.style.minWidth = '200px';
           }
           else {
             cardElement.style.maxWidth = '600px';
             imgElement.style.maxWidth = '600px';
             cardElement.style.maxHeight = 'auto';
             imgElement.style.maxHeight = 'auto';
+            cardElement.style.minWidth = '350px';
+            imgElement.style.minWidth = '350px';
           }
         } else { // Portrait image
           if(isMobile) {
@@ -100,12 +104,16 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
             imgElement.style.maxWidth = 'auto';
             cardElement.style.maxHeight = '15vh';
             imgElement.style.maxHeight = '15vh';
+            cardElement.style.minHeight = '9vh';
+            imgElement.style.minHeight = '9vh';
           }
           else {
             cardElement.style.maxWidth = 'auto';
             imgElement.style.maxWidth = 'auto';
             cardElement.style.maxHeight = '400px';
             imgElement.style.maxHeight = '400px';
+            cardElement.style.minWidth = '200px';
+            imgElement.style.minWidth = '200px';
           }
         }
       }
@@ -128,12 +136,16 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
           imgElement.style.maxWidth = '600px';
           cardElement.style.maxHeight = 'auto';
           imgElement.style.maxHeight = 'auto';
+          cardElement.style.minWidth = '400px';
+          imgElement.style.minWidth = '400px';
         }
         else {
           cardElement.style.maxWidth = '1200px';
           imgElement.style.maxWidth = '1200px';
           cardElement.style.maxHeight = 'auto';
           imgElement.style.maxHeight = 'auto';
+          cardElement.style.minWidth = '600px';
+          imgElement.style.minWidth = '600px';
         }
       } else { // Portrait image
         if(isMobile) {
@@ -141,12 +153,17 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
           imgElement.style.maxWidth = 'auto';
           cardElement.style.maxHeight = '30vh';
           imgElement.style.maxHeight = '30vh';
+          cardElement.style.minHeight = '18px';
+          imgElement.style.minHeight = '18px';
         }
         else {
           cardElement.style.maxWidth = 'auto';
           imgElement.style.maxWidth = 'auto';
           cardElement.style.maxHeight = '800px';
           imgElement.style.maxHeight = '800px';
+          cardElement.style.minHeight = '400px';
+          imgElement.style.minHeight = '400px';
+          
         }
       }
     }
