@@ -378,7 +378,7 @@ const Images = () => {
                   isMobile={isMobile}
                 />
               ) : (
-                <p>No images found</p>
+                <p className='nofound'>No images found</p>
               )}
             </div>
           )}
