@@ -121,12 +121,12 @@ const Account = () => {
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faEnvelope} className='i' />
                                 {/*<img src="/envelope-solid.svg" class="image" alt="" />*/}
-                                <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} required maxLength="50"/>
+                                <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} required/>
                             </div>
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faLock} className='i' />
                                 {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
-                                <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required maxLength="50" />
+                                <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required/>
                             </div>
                             <input type="submit" value="Login" className="btn solid" onClick={handleLoginSubmit} />
                         </form>
@@ -138,12 +138,12 @@ const Account = () => {
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faEnvelope} className='i' />
                                 {/*<img src="/envelope-solid.svg" class="image" alt="" />*/}
-                                <input type="email" placeholder="Email" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value)} required maxLength="50"/>
+                                <input type="email" placeholder="Email" value={registerEmail} onChange={(e) => setRegisterEmail(e.target.value)} required/>
                             </div>
                             <div className="input-field">
                                 <FontAwesomeIcon icon={faLock} className='i' />
                                 {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
-                                <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} required maxLength="50"/>
+                                <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} required/>
                             </div>
                             <input type="submit" value="Sign up" className="btn solid" onClick={handleRegisterSubmit} />
                         </form>
