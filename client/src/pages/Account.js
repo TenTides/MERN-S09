@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Login.css';
+import './Account.css';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
@@ -115,7 +115,7 @@ const Account = () => {
                 <div className="forms-container">
                     <div className="signin-signup">
                         {/* Login Form */}
-                        <form action="" className="signin-form">
+                        <form action="" className="signin-form" onSubmit={handleLoginSubmit}>
                             <h2 className="title">Sign in</h2>
                             {loginError && <p className="error-message">{loginError}</p>}
                             <div className="input-field">
@@ -128,11 +128,11 @@ const Account = () => {
                                 {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
                                 <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} required maxLength="50" />
                             </div>
-                            <input type="submit" value="Login" className="btn solid" onClick={handleLoginSubmit} />
+                            <input type="submit" value="Login" className="btn solid"/>
                         </form>
         
                         {/* Register Form */}
-                        <form action="" className="signup-form">
+                        <form action="" className="signup-form" onSubmit={handleRegisterSubmit}>
                             <h2 className="title">Sign up</h2>
                             {registerError && <p className="error-message">{registerError}</p>}
                             <div className="input-field">
@@ -145,11 +145,11 @@ const Account = () => {
                                 {/*<img src="/lock-solid.svg" class="image" alt="" />*/}
                                 <input type="password" placeholder="Password" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} required maxLength="50"/>
                             </div>
-                            <input type="submit" value="Sign up" className="btn solid" onClick={handleRegisterSubmit} />
+                            <input type="submit" value="Sign up" className="btn solid"/>
                         </form>
                     </div>
                 </div>
-    
+   
                 {/* Panels Container */}
                 <div className="panels-container">
                     {/* Left Panel */}
