@@ -8,7 +8,6 @@ function Navbar() {
     <nav className='h_nav'>
         <span className="name">#Photo4u</span>
         <div className='links'>
-          <Link to="/about" className="more">More</Link>
           <Link to="/images" className="join">Join</Link>
         </div>
     </nav>
