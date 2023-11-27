@@ -191,11 +191,12 @@ nav button:hover {
 
 .cards .loading {
   width: 40vw;
-
 }
 
-
-
+.nofound {
+  color: #fff;
+  font-size: 30px;
+}
 
 .body input {
   padding: 10px;
