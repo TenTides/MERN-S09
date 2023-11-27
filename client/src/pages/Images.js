@@ -49,7 +49,7 @@ const Images = () => {
       console.error('Error fetching photos:', error.message);
     }
   };
-  
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 600);
@@ -78,7 +78,6 @@ const Images = () => {
       .catch((error) => console.error('Error fetching session data:', error));
   }, [])
 
-  fetchPhotos()
 
   useEffect(() => {
     const fetchUser = async () => {
