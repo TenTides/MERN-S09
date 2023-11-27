@@ -42,6 +42,7 @@ const Images = () => {
   
       const json = await response.json();
       setAllPhotos(json);
+      setAllTags(extractUniqueTags(json));
       dispatch({ type: 'SET_PHOTOS', payload: json });
       setLoading(false);
       setFadeIn(true);
@@ -101,10 +102,6 @@ const Images = () => {
     fetchUser();
   }, [userId]);
 
-  useEffect(() => {
-    fetchPhotos();    
-  }, []);
-
   const extractUniqueTags = (photos) => {
     const allTags = photos.reduce((tags, photo) => {
       return tags.concat(photo.tags);
@@ -114,6 +111,13 @@ const Images = () => {
   
     return uniqueTags;
   };
+
+  useEffect(() => {
+    fetchPhotos();    
+
+  }, []);
+
+  
   
   const handleUploadButtonClick = () => {
     setShowForm(true);

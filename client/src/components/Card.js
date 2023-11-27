@@ -24,8 +24,8 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
             imgElement.style.maxWidth = '300px';
             cardElement.style.maxHeight = 'auto';
             imgElement.style.maxHeight = 'auto';
-            cardElement.style.minWidth = '200px';
-            imgElement.style.minWidth = '200px';
+            cardElement.style.minWidth = '170px';
+            imgElement.style.minWidth = '170px';
           }
           else {
             cardElement.style.maxWidth = '600px';
@@ -41,8 +41,8 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
             imgElement.style.maxWidth = 'auto';
             cardElement.style.maxHeight = '15vh';
             imgElement.style.maxHeight = '15vh';
-            cardElement.style.minHeight = '9vh';
-            imgElement.style.minHeight = '9vh';
+            cardElement.style.minHeight = '7vh';
+            imgElement.style.minHeight = '7vh';
           }
           else {
             cardElement.style.maxWidth = 'auto';
@@ -87,8 +87,8 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
             imgElement.style.maxWidth = '300px';
             cardElement.style.maxHeight = 'auto';
             imgElement.style.maxHeight = 'auto';
-            cardElement.style.minWidth = '200px';
-            imgElement.style.minWidth = '200px';
+            cardElement.style.minWidth = '170px';
+            imgElement.style.minWidth = '170px';
           }
           else {
             cardElement.style.maxWidth = '600px';
@@ -104,8 +104,8 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
             imgElement.style.maxWidth = 'auto';
             cardElement.style.maxHeight = '15vh';
             imgElement.style.maxHeight = '15vh';
-            cardElement.style.minHeight = '9vh';
-            imgElement.style.minHeight = '9vh';
+            cardElement.style.minHeight = '7vh';
+            imgElement.style.minHeight = '7vh';
           }
           else {
             cardElement.style.maxWidth = 'auto';
