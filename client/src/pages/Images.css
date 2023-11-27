@@ -3,6 +3,7 @@
   overflow-y: auto;
   font-family: 'IBM Plex Mono', monospace;
   height: 100vh;
+  background-color: #1D1F23;
 }
 
 
@@ -86,8 +87,8 @@
 .cards {
   display: flex;
   flex-direction: column;
-  padding: 55px;
-  width: 95%;
+  padding: 50px;
+  width: 100%;
   max-height: 196vh;
   align-content: flex-start;
   /* border: 1px solid red; */

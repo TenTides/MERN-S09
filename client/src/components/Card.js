@@ -49,8 +49,8 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
             imgElement.style.maxWidth = 'auto';
             cardElement.style.maxHeight = '400px';
             imgElement.style.maxHeight = '400px';
-            cardElement.style.minWidth = '200px';
-            imgElement.style.minWidth = '200px';
+            cardElement.style.minHeight = '250px';
+            imgElement.style.minHeight = '250px';
           }
         }
       }
@@ -112,8 +112,8 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
             imgElement.style.maxWidth = 'auto';
             cardElement.style.maxHeight = '400px';
             imgElement.style.maxHeight = '400px';
-            cardElement.style.minWidth = '200px';
-            imgElement.style.minWidth = '200px';
+            cardElement.style.minHeight = '250px';
+            imgElement.style.minHeight = '250px';
           }
         }
       }
@@ -153,8 +153,8 @@ const Card = ({ id, photoId, imageSrc, title, tags, onClick, onDeleteClick, onCl
           imgElement.style.maxWidth = 'auto';
           cardElement.style.maxHeight = '30vh';
           imgElement.style.maxHeight = '30vh';
-          cardElement.style.minHeight = '18px';
-          imgElement.style.minHeight = '18px';
+          cardElement.style.minHeight = '300px';
+          imgElement.style.minHeight = '300px';
         }
         else {
           cardElement.style.maxWidth = 'auto';
