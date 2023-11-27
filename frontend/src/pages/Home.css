@@ -1,36 +1,22 @@
 .Home {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
   text-align: center;
   background-color: #1D1F23;
-  width: 97vw;
-  height: 300vh;
-  position: relative;
-  overflow-x: hidden;  
+  overflow: hidden; 
 }
 
 .Landing {
   margin-top: 200px;
   display: flex;
   justify-content: center;
-	flex-direction: column;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-
-/* animation for cards */
-
-.square {
-  width: 100px;
-  height: 100px;
-  background-color: red;
-}
-
-.content {
-  width: 100vw;
-  height: 300vh;
-  position: relative;
-}
-
-.animation-box {
-  width: 100vw;
+.frame-box {
+  width: 100%;
   height: 90vh;
   /* background-color: red; */
   position: sticky;
@@ -41,74 +27,49 @@
   overflow: hidden;
 }
 
-.animation-box .card {
-  width: 30vw;
-	height: 30vh;
-	transition: transform 0.8s ease-in-out;
+.icon-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
-.anitext {
+.icons {
+	max-width: 43%;
+	max-height: 43%;
+	transform: translate(80px, 80px);
+	grid-column: 1 / 2;
+	align-items: flex-start;
+}
+
+.phone {
+	transform: translate(-100px, 150px);
+	padding-right: 20px;
+}
+
+.text-title {
 	color: #fff;
 	font-size: 40px;
 	width: 100vw;
 }
 
-.cardOneFirstMove{
-	transform: translateX(205px);
+.text-h1 {
+	color: #fff;
+	font-size: 25px;
+	width: 100vw;
 }
 
-
-.cardTwoFirstMove{
-	transform: translateY(15px);
-	
+.text-h2 {
+	transform: translateX(-100px);
+	color: #fff;
+	font-size: 20px;
+	width: 10vw;
+	text-align: left;
 }
 
-.cardThreeFirstMove{
-	transform: translateX(-205px) translateY(30px);
-}
-
-.float-cards {
-	display: none;
-}
-
-.float-cards .display {
-	display: block;
-	width: 90vw;
-	height: 30vh;
-	position: relative;
-	/* background-color: red; */
-}
-
-.float-cards .display .card {
-	width: 50px;
-	height: 70px;
-	position: absolute;
-	transition: transform 5s ease, left 5s ease, top 5s ease;
-}
-
-
-.upbtn, .downbtn {
-	width: 75px;
-	height: 75px;
-	padding: 30px;
-	border-radius: 50%;
-	font-size: 50px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding-top: 7%;
-	border: none;
-}
-
-.upbtn:hover, .downbtn:hover {
-	scale: 1.01;
-}
-
-.upbtn:active, .downbtn:active {
-	background-color: #e8e8e8;
-	scale: 0.99;
-}
-
-.downbtn {
-	rotate: 180deg;
+.text-caption {
+	color:#fff;
+	font-size: 20px;
+	width: 50vw;
+	text-align: left;
+	margin-left: 100px; 
 }
