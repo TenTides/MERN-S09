@@ -7,28 +7,29 @@
 .h_nav {
   padding-top: 20px;
   display: flex;
-  justify-content: flex-start;  
+  /* justify-content: space-between; */
   align-items: center;
   font-family: 'IBM Plex Mono', monospace;
   color: #F7F5F5;
-  margin-left: 46vw;
   position: fixed;
   z-index: 10;
+  width: 100vw;
+  background-color: #1D1F23;
+  border-bottom: 1px solid #41444c;
+  padding-bottom: 10px;
 }
 
 .name {
   font-size: 32px;
-  /* flex: 1;  */
-  /* margin-right: 17vw; */
+  margin-left: 45vw;
 }
 
 .links {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin-left: 30vw;
+  margin-left: 25vw;
   font-size: 24px;
-  /* border: 1px solid green; */
 }
 
 .join, .more {
@@ -42,4 +43,18 @@
 
 .more {
   padding-right: max(5vw, 10px);
+}
+
+@media (max-width: 780px) {
+  .name {
+    font-size: 32px;
+    margin-left: 5vw;
+  }
+  .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-left: 10vw;
+    font-size: 24px;
+  }
 }
