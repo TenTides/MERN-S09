@@ -44,3 +44,17 @@
 .more {
   padding-right: max(5vw, 10px);
 }
+
+@media (max-width: 780px) {
+  .name {
+    font-size: 32px;
+    margin-left: 5vw;
+  }
+  .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-left: 10vw;
+    font-size: 24px;
+  }
+}
