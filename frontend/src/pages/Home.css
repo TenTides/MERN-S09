@@ -80,31 +80,15 @@
 }
 
 .image-box {
-	height: 100vh;
-	padding: 2% 5%;
+	padding-top: 40px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
 .img1 {
-	width: 30%;
-	height: 90%;
-	/* background-color: white; */
-	margin: 0 5%;
-}
-
-.img2 {
-	width: 30%;
-	height: 90%;
-	/* background-color: white; */
-	margin: 0 5%;
-	display: flex;
-	flex-direction: column;
-}
-
-.img2 img { 
-	height: 300px;
+	width: 50%;
+	height: 50%;
 }
 
 /* Adjust for mobile */
@@ -166,15 +150,13 @@
 	}
   
 	.image-box {
+	  margin-top: -10vh;
 	  height: auto; 
 	  padding: 2% 2%; 
 	}
   
-	.img1, .img2 {
-	  display: none; 
-	}
-  
-	.img2 img {
-	  display:none;
+	.img1 {
+		width: 80%;
+		height: 80%;
 	}
   }

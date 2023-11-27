@@ -3,9 +3,7 @@ import Card from '../components/Card';
 import Navbar from '../components/Navbar';
 import phoneFrame from './img/phone-frame.png'; // Import image
 import img1 from './img/img1.svg'; // Import image
-import photo from './img/photographer.jpg'; // Import image
-import cigar from './img/sir-manuel.jpg'; // Import image
-import train from './img/train.jpg'; // Import image
+import photo from './img/super-awesome-photos.png'; // Import image
 import './Home.css';
 
 const Home = () => {
@@ -26,13 +24,7 @@ const Home = () => {
           <img src={phoneFrame} className='phone' alt="" /> {/*Show /images page*/}
         </div>
         <div className="image-box">
-          <div className='img1'>
-            <img src={photo} alt="" />
-          </div>
-          <div className='img2'>
-            <img id="1" src={cigar} alt="" />
-            <img id="2" src={train} alt="" />
-          </div>
+          <img src={photo} className='img1' alt="" />
         </div>
       </div>
     </div>
